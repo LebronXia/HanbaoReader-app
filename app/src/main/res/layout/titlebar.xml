@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        >
+
+        <RelativeLayout
+            android:id="@+id/btn_hamburger"
+            android:layout_width="48dp"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="23dp"
+                android:layout_height="16dp"
+                android:layout_marginLeft="10dp"
+                android:background="@mipmap/icon_hamburger"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:gravity="bottom"
+            android:orientation="horizontal"
+            android:paddingRight="10dp"
+            >
+            <LinearLayout
+                android:id="@+id/ll_firstTab"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:gravity="bottom"
+                android:orientation="vertical"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="书架"
+                    android:textSize="15dp"
+                    android:textColor="@color/white"
+                    android:layout_gravity="center_horizontal"
+                    />
+                <View
+                    android:id="@+id/firstTabview"
+                    android:layout_marginTop="15dp"
+                    android:layout_width="25dp"
+                    android:layout_height="2dp"
+                    android:background="@color/font_orange"
+                    android:layout_gravity="center_horizontal"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_secondTab"
+                android:layout_marginLeft="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:gravity="bottom"
+                android:orientation="vertical"
+                >
+
+                <TextView
+                    android:id="@+id/booktext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="书城"
+                    android:textSize="15dp"
+                    android:textColor="@color/white"
+                    android:layout_gravity="center_horizontal"
+                    />
+                <View
+                    android:id="@+id/secondTabview"
+                    android:layout_marginTop="15dp"
+                    android:layout_width="25dp"
+                    android:layout_height="2dp"
+                    android:background="@color/font_orange"
+                    android:layout_gravity="center_horizontal"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/btn_search"
+            android:layout_width="48dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            >
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="20dp"
+                android:background="@mipmap/search_nor"
+                android:layout_centerInParent="true"/>
+        </RelativeLayout>
+    </RelativeLayout>
+
+</LinearLayout>
