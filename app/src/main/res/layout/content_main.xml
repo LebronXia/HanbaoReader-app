@@ -40,7 +40,7 @@
             android:background="?attr/colorPrimary"
             app:stl_dividerColor="?attr/colorPrimary"
             app:stl_defaultTabTextSize="15sp"
-
+            android:visibility="gone"
             ></com.ogaclejapan.smarttablayout.SmartTabLayout>
 
     </android.support.design.widget.AppBarLayout>
