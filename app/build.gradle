@@ -27,6 +27,11 @@ android {
 // 注释冲突
     packagingOptions {
         exclude 'META-INF/services/javax.annotation.processing.Processor'
+        exclude 'META-INF/DEPENDENCIES.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
     }
 }
 
@@ -54,11 +59,16 @@ dependencies {
     apt "com.google.dagger:dagger-compiler:${libs.dagger}"
     compile "org.glassfish:javax.annotation:${libs.javax_annotation}"
 
+    //ORMlite
+    compile "com.j256.ormlite:ormlite-android:4.48"
+    compile "com.j256.ormlite:ormlite-core:4.48"
+
     // Others
     compile "com.jakewharton:butterknife:${libs.butterknife}" // 资源注入
     compile "com.github.bumptech.glide:glide:${libs.glide}" // 图片处理
     compile "jp.wasabeef:recyclerview-animators:${libs.recycler_animators}" // Recycler动画
     compile "de.hdodenhof:circleimageview:${libs.circleimageview}" // 头像视图
     compile 'com.yalantis:phoenix:1.2.3'
+    compile "com.facebook.stetho:stetho:1.3.1"
 
 }

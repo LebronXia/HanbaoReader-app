@@ -2,19 +2,19 @@ package com.example.riane.hanbaoreader_app.ui.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.riane.hanbaoreader_app.R;
+import com.example.riane.hanbaoreader_app.app.BaseFragment;
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
 
 /**
  * Created by Xiamu on 2016/3/17.
  */
-public class BookStoreFragment extends Fragment{
+public class BookStoreFragment extends BaseFragment {
 
     private ViewPager mViewPager;
     private SmartTabLayout mSmartTabLayout;

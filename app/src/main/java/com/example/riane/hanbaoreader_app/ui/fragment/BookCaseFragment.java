@@ -2,7 +2,6 @@ package com.example.riane.hanbaoreader_app.ui.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -12,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.riane.hanbaoreader_app.R;
+import com.example.riane.hanbaoreader_app.app.BaseFragment;
 import com.example.riane.hanbaoreader_app.ui.adapter.BookCaseAdapter;
 
 import java.util.ArrayList;
@@ -24,7 +24,7 @@ import butterknife.ButterKnife;
 /**
  * Created by Xiamu on 2016/3/17.
  */
-public class BookCaseFragment extends Fragment{
+public class BookCaseFragment extends BaseFragment {
 
     @Bind(R.id.recycler_view)
     RecyclerView mRecyclerView;
