@@ -116,6 +116,7 @@ public class DirectoryFragment extends BaseFragment{
 
     }
 
+    //点击文件
     public interface  FileClickListener{
         void onFileClicked(File clickedFile);
     }

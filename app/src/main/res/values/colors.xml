@@ -9,5 +9,7 @@
     <color name="color_item_normal">#44ff0000</color>
     <color name="empty_directory_hint">#c7c7c7</color>
     <color name="item_file_title_color">#424242</color>
+    <color name="btn_state_nor">#3490DE</color>
+    <color name="btn_state_pre">#B4F1F1</color>
 
 </resources>

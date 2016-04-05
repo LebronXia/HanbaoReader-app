@@ -19,7 +19,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper{
     private static final String TABLE_NAME = "table_book.db";
     private Dao bookdao = null;
     private DatabaseHelper(Context context) {
-        super(context, TABLE_NAME, null, 2);
+        super(context, TABLE_NAME, null, 3);
     }
 
     //创建BOOK表

@@ -15,8 +15,8 @@ import java.util.Map;
 
 public class FileTypeUtils {
     public enum FileType {
-        DIRECTORY(R.mipmap.ic_folder_gray_48dp, R.string.type_directory),
-        DOCUMENT(R.mipmap.ic_document_box, R.string.type_document);
+        DIRECTORY(R.mipmap.folder, R.string.type_directory),
+        DOCUMENT(R.mipmap.file_txt, R.string.type_document);
 //        CERTIFICATE(R.drawable.ic_certificate_box, R.string.type_certificate, "cer", "der", "pfx", "p12", "arm", "pem"),
 //        DRAWING(R.drawable.ic_drawing_box, R.string.type_drawing, "ai", "cdr", "dfx", "eps", "svg", "stl", "wmf", "emf", "art", "xar"),
 //        EXCEL(R.drawable.ic_excel_box, R.string.type_excel, "xls", "xlk", "xlsb", "xlsm", "xlsx", "xlr", "xltm", "xlw", "numbers", "ods", "ots"),

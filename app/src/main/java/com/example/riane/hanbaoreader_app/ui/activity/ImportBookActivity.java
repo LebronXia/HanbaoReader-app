@@ -3,19 +3,23 @@ package com.example.riane.hanbaoreader_app.ui.activity;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.riane.hanbaoreader_app.R;
 import com.example.riane.hanbaoreader_app.app.BaseActivity;
 import com.example.riane.hanbaoreader_app.ui.fragment.DirectoryFragment;
 import com.example.riane.hanbaoreader_app.util.FileUtils;
 import com.example.riane.hanbaoreader_app.view.impl.ImportBookView;
+import com.mingle.widget.ShapeLoadingDialog;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 import butterknife.Bind;
@@ -37,6 +41,7 @@ public class ImportBookActivity extends BaseActivity implements ImportBookView,D
     @Bind(R.id.tv_path)
     TextView mPathTextView;
 
+    private ShapeLoadingDialog mShapeLoadingDialog;
     private String mStartPath = Environment.getExternalStorageDirectory().getAbsolutePath();//获取外部存储目录即 SDCard
     private String mCurrentPath = mStartPath;
     private String path = Environment.getExternalStorageDirectory()+"/";
@@ -44,13 +49,34 @@ public class ImportBookActivity extends BaseActivity implements ImportBookView,D
     private Pattern mFileFilter;  //过滤器
     private boolean mDirectoriesFilter;  //允许使用过滤器
     private boolean mShownHidden;  //显示隐藏文件和文件夹的选择
+    private ArrayList<String> mSearchitems;  //搜索结果
 
+    Handler mHandler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what){
+                case 0:
+                    mShapeLoadingDialog.show();
+                    break;
+                case  1:
+                    mShapeLoadingDialog.dismiss();
+                    if(mSearchitems != null && mSearchitems.size() > 0){
+                        startActivity(SearchBookActivity.getCallingIntent(ImportBookActivity.this,mSearchitems));
+                    } else {
+                        Toast.makeText(ImportBookActivity.this,"未匹配到文件！",Toast.LENGTH_LONG).show();
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_import);
         ButterKnife.bind(this);
-
         initArguments();
         initViews();
 
@@ -60,6 +86,12 @@ public class ImportBookActivity extends BaseActivity implements ImportBookView,D
         } else {
             initFragmnet();
         }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mSearchitems = new ArrayList<String>();
     }
 
     public void initViews(){
@@ -74,6 +106,8 @@ public class ImportBookActivity extends BaseActivity implements ImportBookView,D
                 finish();
             }
         });
+        mShapeLoadingDialog = new ShapeLoadingDialog(this);
+        mShapeLoadingDialog.setLoadingText("搜索中...");
         updatePathText();
     }
 
@@ -124,6 +158,14 @@ public class ImportBookActivity extends BaseActivity implements ImportBookView,D
         onBackPressed();
     }
 
+    @OnClick(R.id.toolbar_txt_btn)
+    public void setSearchbook(){
+        Message message = new Message();
+        message.what = 0;
+        mHandler.sendMessage(message);
+        new SearchThread().start();
+    }
+
     @Override
     public void onBackPressed() {
         FragmentManager fm = getSupportFragmentManager();
@@ -160,6 +202,48 @@ public class ImportBookActivity extends BaseActivity implements ImportBookView,D
         } else {
             //setResultAndFinish(clickedFile.getPath());
         }
+    }
+
+    //扫描图书线程
+    class SearchThread extends Thread{
+
+        public SearchThread() {
+            super();
+        }
+        @Override
+        public void run() {
+            super.run();
+            File f = new File(mCurrentPath);
+            getFiles(f);
+            Message message = new Message();
+            message.what = 1;
+            mHandler.sendMessage(message);
+        }
+    }
+
+    //递归遍历扫描文件夹
+    public void getFiles(File filePath){
+        //列出该文件夹路径下的文件
+        File[] files = filePath.listFiles();
+        if (files != null){
+            for (int i = 0; i < files.length; i++){
+                //判断是不是文件
+                if (files[i].isDirectory()){
+                    getFiles(files[i]);
+                } else {
+                    if (files[i].getName().endsWith(".txt")){
+                        mSearchitems.add(files[i].getAbsolutePath());
+
+                    }
+                }
+            }
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mSearchitems = null;
     }
 
     @Override

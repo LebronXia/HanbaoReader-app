@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.riane.hanbaoreader_app.R;
+import com.example.riane.hanbaoreader_app.modle.Book;
 
 import java.util.List;
 
@@ -18,11 +19,11 @@ import java.util.List;
  */
 public class BookCaseAdapter extends RecyclerView.Adapter<BookCaseAdapter.MyViewHolder>{
 
-    private List<Integer> mDatas;
+    private List<Book> mDatas;
     private LayoutInflater mInflater;
     private OnItemClickListener mOnItemClickListener;
 
-    public BookCaseAdapter(Context context, List<Integer> datas){
+    public BookCaseAdapter(Context context, List<Book> datas){
         mInflater = LayoutInflater.from(context);
         mDatas = datas;
     }
@@ -41,7 +42,10 @@ public class BookCaseAdapter extends RecyclerView.Adapter<BookCaseAdapter.MyView
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
-        holder.mImg.setImageResource(mDatas.get(position));
+         holder.mImg.setImageResource(R.mipmap.cover_txt);
+         holder.mTxt.setText(mDatas.get(position).getName());
+         holder.mProgress.setText("已读" + mDatas.get(position).getProgress());
+
 
         //如果设置了回调，则设置点击事件
         if (mOnItemClickListener != null){
@@ -77,10 +81,12 @@ public class BookCaseAdapter extends RecyclerView.Adapter<BookCaseAdapter.MyView
     public class MyViewHolder extends ViewHolder{
         TextView mTxt;
         ImageView mImg;
+        TextView mProgress;
         public MyViewHolder(View itemView) {
             super(itemView);
             mImg = (ImageView) itemView.findViewById(R.id.iv_book_picture);
             mTxt = (TextView) itemView.findViewById(R.id.tv_itemtext);
+            mProgress = (TextView) itemView.findViewById(R.id.tv_progress);
         }
 
     }

@@ -35,6 +35,15 @@ public class BookDao {
         }
     }
 
+    //先判断不存在则插入
+    public void addNotExists(Book book){
+        try {
+            bookDaoOpe.createIfNotExists(book);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     //查询所有图书
     public List<Book> getAll(){
         List<Book> bookList = null;
@@ -45,6 +54,18 @@ public class BookDao {
         }
         return bookList;
     }
+
+    //查询一本书
+    public List<Book> getBook(String name){
+        List<Book> bookList = null;
+        try {
+            bookList = bookDaoOpe.queryBuilder().where().eq("name",name).query();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return bookList;
+    }
+
     //删除一本书
     public void delete(int id){
         try {

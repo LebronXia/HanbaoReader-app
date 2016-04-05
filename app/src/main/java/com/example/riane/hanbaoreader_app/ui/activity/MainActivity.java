@@ -44,7 +44,12 @@ public class MainActivity extends BaseActivity {
 
         ButterKnife.bind(this);
         switchcontent(mBookStoreFragment, mBookCaseFragment);
+        initData();
         initView();
+
+    }
+
+    private void initData() {
 
     }
 

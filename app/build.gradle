@@ -70,5 +70,6 @@ dependencies {
     compile "de.hdodenhof:circleimageview:${libs.circleimageview}" // 头像视图
     compile 'com.yalantis:phoenix:1.2.3'
     compile "com.facebook.stetho:stetho:1.3.1"
-
+    compile project(':library')        //check视图
+    compile project(':shapeloading')  //等待视图
 }

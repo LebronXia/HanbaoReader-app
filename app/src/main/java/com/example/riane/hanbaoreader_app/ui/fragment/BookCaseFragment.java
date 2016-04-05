@@ -8,14 +8,15 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.riane.hanbaoreader_app.R;
 import com.example.riane.hanbaoreader_app.app.BaseFragment;
+import com.example.riane.hanbaoreader_app.cache.BookDao;
+import com.example.riane.hanbaoreader_app.modle.Book;
 import com.example.riane.hanbaoreader_app.ui.adapter.BookCaseAdapter;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import butterknife.Bind;
@@ -29,7 +30,9 @@ public class BookCaseFragment extends BaseFragment {
     @Bind(R.id.recycler_view)
     RecyclerView mRecyclerView;
     private BookCaseAdapter mCaseAdapter;
-    private List<Integer> mDatas;
+    @Bind(R.id.empty_view)
+    RelativeLayout rl_emptyView;
+    private List<Book> mDatas;
 
     @Nullable
     @Override
@@ -44,7 +47,7 @@ public class BookCaseFragment extends BaseFragment {
     public void initRecycleView(){
         //创建默认的线性LayoutManager
         //GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(),3);
-        StaggeredGridLayoutManager layout = new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
+        StaggeredGridLayoutManager layout = new StaggeredGridLayoutManager(3,StaggeredGridLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(layout);
         //如果确定每个item的高度是固定的，设置这个选项可以提高性能
         mRecyclerView.setHasFixedSize(true);
@@ -71,8 +74,14 @@ public class BookCaseFragment extends BaseFragment {
 
     private void initDatas()
     {
-        mDatas = new ArrayList<Integer>(Arrays.asList(R.mipmap.mao,
-                R.mipmap.mao, R.mipmap.mao, R.mipmap.mao, R.mipmap.mao,
-                R.mipmap.mao, R.mipmap.mao, R.mipmap.mao, R.mipmap.mao));
+        BookDao bookDao = new BookDao(getActivity());
+        mDatas = bookDao.getAll();
+        if (mDatas == null && mDatas.size() < 1){
+            mRecyclerView.setVisibility(View.GONE);
+            rl_emptyView.setVisibility(View.VISIBLE);
+        } else {
+            rl_emptyView.setVisibility(View.GONE);
+            mRecyclerView.setVisibility(View.VISIBLE);
+        }
     }
 }

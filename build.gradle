@@ -21,13 +21,15 @@ ext {
             glide             : "3.6.1",
             recycler_animators: "2.1.0",
             circleimageview   : "2.0.0",
-
     ]
 }
 
 buildscript {
     repositories {
         jcenter()
+        maven {
+            url "https://jitpack.io"
+        }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:1.5.0'
