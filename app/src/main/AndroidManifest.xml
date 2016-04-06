@@ -30,6 +30,11 @@
                   android:theme="@style/AppTheme.NoActionBar">
 
         </activity>
+
+        <activity android:name=".ui.activity.ReadBookActivity"
+                  android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
     </application>
 
 </manifest>

@@ -1,5 +1,6 @@
 package com.example.riane.hanbaoreader_app.ui.fragment;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -15,8 +16,11 @@ import com.example.riane.hanbaoreader_app.R;
 import com.example.riane.hanbaoreader_app.app.BaseFragment;
 import com.example.riane.hanbaoreader_app.cache.BookDao;
 import com.example.riane.hanbaoreader_app.modle.Book;
+import com.example.riane.hanbaoreader_app.ui.activity.ReadBookActivity;
 import com.example.riane.hanbaoreader_app.ui.adapter.BookCaseAdapter;
+import com.example.riane.hanbaoreader_app.util.ToastUtils;
 
+import java.io.File;
 import java.util.List;
 
 import butterknife.Bind;
@@ -33,6 +37,8 @@ public class BookCaseFragment extends BaseFragment {
     @Bind(R.id.empty_view)
     RelativeLayout rl_emptyView;
     private List<Book> mDatas;
+
+    private ProgressDialog dialog;
 
     @Nullable
     @Override
@@ -58,6 +64,7 @@ public class BookCaseFragment extends BaseFragment {
             @Override
             public void onItemClick(View view, int position) {
                 Toast.makeText(getActivity(), position + " click", Toast.LENGTH_SHORT).show();
+                readBook(position);
             }
 
             @Override
@@ -72,8 +79,7 @@ public class BookCaseFragment extends BaseFragment {
 
     }
 
-    private void initDatas()
-    {
+    private void initDatas() {
         BookDao bookDao = new BookDao(getActivity());
         mDatas = bookDao.getAll();
         if (mDatas == null && mDatas.size() < 1){
@@ -83,5 +89,19 @@ public class BookCaseFragment extends BaseFragment {
             rl_emptyView.setVisibility(View.GONE);
             mRecyclerView.setVisibility(View.VISIBLE);
         }
+    }
+
+    //阅读
+    public void readBook(int position){
+        dialog = ProgressDialog.show(getActivity(),"温馨提示","正在加载文件",true);
+        Book book = mDatas.get(position);
+        File file = new File(book.getFilePath());
+        if (!file.exists()){
+            ToastUtils.toast(getActivity(), "文件不存在");
+            dialog.dismiss();
+            return;
+        }
+        dialog.dismiss();
+       startActivity(ReadBookActivity.getCallingIntent(getActivity(), book));
     }
 }

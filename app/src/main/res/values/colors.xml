@@ -12,4 +12,8 @@
     <color name="btn_state_nor">#3490DE</color>
     <color name="btn_state_pre">#B4F1F1</color>
 
+    <color name="main_bg_1">#fdf7d5</color>
+    <color name="main_bg_2">#668564</color>
+    <color name="main_bg_3">#997c56</color>
+
 </resources>

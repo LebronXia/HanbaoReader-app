@@ -96,14 +96,16 @@ public class BookPageView extends View {
 	 *  计算拖拽点对应的拖拽脚
 	 */
 	public void calcCornerXY(float x, float y) {
-		if (x <= mWidth / 2)
+		if (x <= mWidth / 3)
 			mCornerX = 0;
-		else
+		else if ( x >mWidth * (2/3)){
 			mCornerX = mWidth;
-		if (y <= mHeight / 2)
+		}
+		if (y <= mHeight / 3)
 			mCornerY = 0;
-		else
+		else if ( y > mHeight * (2/3)){
 			mCornerY = mHeight;
+		}
 		if ((mCornerX == 0 && mCornerY == mHeight)
 				|| (mCornerX == mWidth && mCornerY == 0))
 			mIsRTandLB = true;

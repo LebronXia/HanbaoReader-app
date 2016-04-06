@@ -75,4 +75,13 @@ public class BookDao {
         }
 
     }
+
+    //更新一本书
+    public void update(Book book){
+        try {
+            bookDaoOpe.update(book);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
