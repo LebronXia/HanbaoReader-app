@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+     <LinearLayout
+         android:layout_width="match_parent"
+         android:layout_height="60dp"
+         android:orientation="horizontal"
+         android:background="@color/white">
+
+         <TextView
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="字号"
+             android:textSize="14sp"
+             android:layout_gravity="center_vertical"
+             android:layout_marginLeft="12dp"
+             />
+         
+         <Button
+             android:id="@+id/btn_smalltext"
+             android:layout_width="wrap_content"
+             android:layout_height="30dp"
+             android:background="@drawable/textbutton_background"
+             android:layout_gravity="center_vertical"
+             android:layout_marginLeft="15dp"
+             android:text="小"
+             />
+         <TextView
+             android:id="@+id/tv_textsize"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_marginLeft="15dp"
+             android:layout_marginRight="15dp"
+             android:text="13"
+             android:textSize="15dp"
+             android:layout_gravity="center_vertical"
+             />
+         <Button
+             android:id="@+id/btn_bigtext"
+             android:layout_width="wrap_content"
+             android:layout_height="30dp"
+             android:background="@drawable/textbutton_background"
+             android:layout_gravity="center_vertical"
+             android:text="大"
+             />
+     </LinearLayout>
+
+</LinearLayout>

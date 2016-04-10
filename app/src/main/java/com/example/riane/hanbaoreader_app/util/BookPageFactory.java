@@ -36,6 +36,7 @@ public class BookPageFactory {
 	// 文字的启动位置
 	private int m_mbBufBegin = 0;
 	private int m_mbBufEnd = 0;
+
 	private String m_strCharsetName = "GBK";
 	private Bitmap m_book_bg = null;
 	private int mWidth;// 屏幕宽度
@@ -45,7 +46,7 @@ public class BookPageFactory {
 	// 因为MappedByteBuffer是同步处理的，故使用Vector
 	private Vector<String> m_lines = new Vector<String>();
 
-	private int m_fontSize = 24;
+	private int m_fontSize = 20;
 	private int m_textColor = Color.BLACK;
 	//0xffff9e85
 	private int m_backColor = Color.rgb(199, 237, 204); // 背景颜色
@@ -85,6 +86,7 @@ public class BookPageFactory {
 		m_mbBuf = new RandomAccessFile(book_file, "r").getChannel().map(FileChannel.MapMode.READ_ONLY, 0, lLen);
 		// 把数据库的初始位置取出来赋值
 		this.m_mbBufEnd = book.getBegin();//(book.getPageNo-1)*book.getPageSize
+		LogUtils.d("m_mbBufEnd   书本开始位置" + m_mbBufEnd);
 		this.m_mbBufBegin = this.m_mbBufEnd;
 		return lLen;
 	}
@@ -268,6 +270,12 @@ public class BookPageFactory {
 		return;
 	}
 
+	//当前页
+	public void currentPage() throws IOException {
+		m_lines.clear();
+		m_lines = pageDown();
+	}
+
 	//向前翻页
 	public void prePage() throws IOException{
 		if (m_mbBufBegin <= 0) {
@@ -353,7 +361,7 @@ public class BookPageFactory {
 	//设置页面起始点
 	public void setM_mbBufEnd(int m_mbBufEnd) {
 		this.m_mbBufEnd = m_mbBufEnd;
-		this.m_mbBufBegin = m_mbBufEnd;
+		//this.m_mbBufBegin = m_mbBufEnd;
 		this.m_lines.clear();
 	}
 
@@ -364,7 +372,29 @@ public class BookPageFactory {
 	public void setM_backColor(int m_backColor) {
 		this.m_backColor = m_backColor;
 	}
-	
-	
+
+	public int getM_mbBufLen() {
+		return m_mbBufLen;
+	}
+
+	public void setM_mbBufLen(int m_mbBufLen) {
+		this.m_mbBufLen = m_mbBufLen;
+	}
+
+	public int getM_mbBufBegin() {
+		return m_mbBufBegin;
+	}
+	//设置页面结束点
+	public void setM_mbBufBegin(int m_mbBufBegin) {
+		this.m_mbBufBegin = m_mbBufBegin;
+	}
+
+	public int getM_mbBufEnd() {
+		return m_mbBufEnd;
+	}
+
+	public String getFirstLineText() {
+		return m_lines.size() > 0 ? m_lines.get(0) : "";
+	}
 
 }

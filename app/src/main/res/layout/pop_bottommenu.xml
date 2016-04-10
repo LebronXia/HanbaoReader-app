@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/ll_bottommenu"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_weight="1"
+        android:alpha="0.99"
+        android:background="@color/main_bg_1"
+        android:orientation="horizontal"
+        >
+
+        <ImageView
+            android:id="@+id/iv_bookmenu"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="0.25"
+            android:src="@mipmap/menu_catalog"
+            />
+
+        <ImageView
+            android:id="@+id/iv_booksize"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="0.25"
+            android:src="@mipmap/icon_item_font"
+            />
+
+        <ImageView
+            android:id="@+id/iv_booklight"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="0.25"
+            android:src="@mipmap/page_brightness_up_day"
+            />
+
+        <ImageView
+            android:id="@+id/iv_bookmark"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="0.25"
+            android:src="@drawable/bookarks_button_bg"
+            />
+    </LinearLayout>
+
+</RelativeLayout>

@@ -49,6 +49,7 @@ public class BookPageView extends View {
 	float[] mMatrixArray = { 0, 0, 0, 0, 0, 0, 0, 0, 1.0f };
 
 	boolean mIsRTandLB; // 是否属于右上左下
+	boolean mIsMiddle; //是不是按到中间
 	// 返回 sqrt(x2 +y2)，没有中间溢出或下溢。
 	float mMaxLength = (float) Math.hypot(mWidth, mHeight);
 	int[] mBackShadowColors;
@@ -96,16 +97,14 @@ public class BookPageView extends View {
 	 *  计算拖拽点对应的拖拽脚
 	 */
 	public void calcCornerXY(float x, float y) {
-		if (x <= mWidth / 3)
+		if (x <= mWidth / 2)
 			mCornerX = 0;
-		else if ( x >mWidth * (2/3)){
+		else
 			mCornerX = mWidth;
-		}
-		if (y <= mHeight / 3)
+		if (y <= mHeight / 2)
 			mCornerY = 0;
-		else if ( y > mHeight * (2/3)){
+		else
 			mCornerY = mHeight;
-		}
 		if ((mCornerX == 0 && mCornerY == mHeight)
 				|| (mCornerX == mWidth && mCornerY == 0))
 			mIsRTandLB = true;
@@ -122,16 +121,21 @@ public class BookPageView extends View {
 			mTouch.x = event.getX();
 			mTouch.y = event.getY();
 			// 重绘
-			this.postInvalidate();
+			//this.postInvalidate();
 		}
 		if (event.getAction() == MotionEvent.ACTION_DOWN) {// 屏幕按下
 			mTouch.x = event.getX();
 			mTouch.y = event.getY();
+			if( mWidth * 1/3 < mTouch.x && mTouch.x < mWidth * 2/3 ){
+				mIsMiddle = true;
+			} else {
+				mIsMiddle = false;
+			}
 			// calcCornerXY(mTouch.x, mTouch.y);
 			// this.postInvalidate();
 		}
 		if (event.getAction() == MotionEvent.ACTION_UP) {// 屏幕按下
-			if (canDragOver()) {
+			if (canDragOver() && !mIsMiddle) {
 				startAnimation(1200);
 			} else {
 				mTouch.x = mCornerX - 0.09f;
@@ -140,7 +144,7 @@ public class BookPageView extends View {
 			// 重绘
 			this.postInvalidate();
 		}
-		// return super.onTouchEvent(event);
+		 //return super.onTouchEvent(event);
 		return true;
 	}
 

@@ -1,6 +1,7 @@
 package com.example.riane.hanbaoreader_app.ui.activity;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -17,6 +18,9 @@ import com.example.riane.hanbaoreader_app.app.BaseActivity;
 import com.example.riane.hanbaoreader_app.ui.fragment.BookCaseFragment;
 import com.example.riane.hanbaoreader_app.ui.fragment.BookStoreFragment;
 import com.example.riane.hanbaoreader_app.widget.MyTitleView;
+
+import java.io.Serializable;
+import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -111,6 +115,11 @@ public class MainActivity extends BaseActivity {
     public void startImprotActivity(){
         Intent intent = new Intent(MainActivity.this,ImportBookActivity.class);
         startActivity(intent);
+    }
+
+    public static Intent getCallingIntent(Context context){
+        Intent intent = new Intent(context, MainActivity.class);
+        return intent;
     }
 
 }

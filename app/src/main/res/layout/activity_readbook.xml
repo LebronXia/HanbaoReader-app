@@ -17,86 +17,8 @@
     <RelativeLayout
         android:id="@+id/rl_readview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         >
 
     </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/rl_topMenu"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:alpha="0.99"
-        android:background="@color/main_bg_1"
-        android:clickable="true"
-        android:visibility="gone"
-        >
-        <ImageView
-            android:id="@+id/iv_bookhome"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_alignParentLeft="true"
-            android:layout_gravity="center_vertical"
-            android:src="@mipmap/menu_pre_article"
-            />
-
-        <ImageView
-            android:id="@+id/iv_bookmore"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_alignParentRight="true"
-            android:layout_gravity="center_vertical"
-            android:layout_marginRight="2dip"
-            android:src="@drawable/button_more_bg"
-            />
-
-    </RelativeLayout>
-
-    <LinearLayout
-        android:id="@+id/ll_bottommenu"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_alignParentBottom="true"
-        android:layout_weight="1"
-        android:alpha="0.99"
-        android:orientation="horizontal"
-        android:visibility="gone"
-        >
-
-        <ImageView
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="0.25"
-            android:src="@mipmap/menu_catalog"
-            />
-
-        <ImageView
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="0.25"
-            android:src="@mipmap/icon_item_font"
-            />
-
-        <ImageView
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="0.25"
-            android:src="@mipmap/page_brightness_up_day"
-            />
-
-        <ImageView
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="0.25"
-            android:src="@drawable/bookarks_button_bg"
-            />
-    </LinearLayout>
-
-
-
 </RelativeLayout>
