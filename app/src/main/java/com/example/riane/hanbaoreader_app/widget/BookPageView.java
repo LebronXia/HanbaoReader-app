@@ -121,7 +121,7 @@ public class BookPageView extends View {
 			mTouch.x = event.getX();
 			mTouch.y = event.getY();
 			// 重绘
-			//this.postInvalidate();
+			this.postInvalidate();
 		}
 		if (event.getAction() == MotionEvent.ACTION_DOWN) {// 屏幕按下
 			mTouch.x = event.getX();
@@ -134,7 +134,8 @@ public class BookPageView extends View {
 			// calcCornerXY(mTouch.x, mTouch.y);
 			// this.postInvalidate();
 		}
-		if (event.getAction() == MotionEvent.ACTION_UP) {// 屏幕按下
+		if (event.getAction() == MotionEvent.ACTION_UP) {// 屏幕发开
+			//是否出发翻页
 			if (canDragOver() && !mIsMiddle) {
 				startAnimation(1200);
 			} else {
@@ -314,9 +315,9 @@ public class BookPageView extends View {
 		canvas.drawColor(0xFFAAAAAA);
 		calcPoints();
 		drawCurrentPageArea(canvas, mCurPageBitmap, mPath0);
-		drawNextPageAreaAndShadow(canvas, mNextPageBitmap);
-		drawCurrentPageShadow(canvas);
-		drawCurrentBackArea(canvas, mCurPageBitmap);
+		drawNextPageAreaAndShadow(canvas, mNextPageBitmap);  //绘制下页 阴影
+		drawCurrentPageShadow(canvas);    //绘制翻起页阴影
+		drawCurrentBackArea(canvas, mCurPageBitmap);   //绘制翻起页背面
 	}
 
 	/**

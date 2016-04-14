@@ -18,6 +18,7 @@ import com.example.riane.hanbaoreader_app.cache.BookDao;
 import com.example.riane.hanbaoreader_app.modle.Book;
 import com.example.riane.hanbaoreader_app.ui.activity.ReadBookActivity;
 import com.example.riane.hanbaoreader_app.ui.adapter.BookCaseAdapter;
+import com.example.riane.hanbaoreader_app.util.LogUtils;
 import com.example.riane.hanbaoreader_app.util.ToastUtils;
 
 import java.io.File;
@@ -63,7 +64,7 @@ public class BookCaseFragment extends BaseFragment {
         mCaseAdapter.setOnItemClickListener(new BookCaseAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                Toast.makeText(getActivity(), position + " click", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), position + " click", Toast.LENGTH_SHORT).show();
                 readBook(position);
             }
 
@@ -82,7 +83,7 @@ public class BookCaseFragment extends BaseFragment {
     private void initDatas() {
         BookDao bookDao = new BookDao(getActivity());
         mDatas = bookDao.getAll();
-        if (mDatas == null && mDatas.size() < 1){
+        if (mDatas == null || mDatas.size() < 1){
             mRecyclerView.setVisibility(View.GONE);
             rl_emptyView.setVisibility(View.VISIBLE);
         } else {
@@ -97,7 +98,7 @@ public class BookCaseFragment extends BaseFragment {
         Book book = mDatas.get(position);
         File file = new File(book.getFilePath());
         if (!file.exists()){
-            ToastUtils.toast(getActivity(), "文件不存在");
+            ToastUtils.showShort(getActivity(), "文件不存在");
             dialog.dismiss();
             return;
         }

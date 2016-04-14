@@ -174,6 +174,8 @@ public class ImportBookActivity extends BaseActivity implements ImportBookView,D
             fm.popBackStack();
             mCurrentPath = FileUtils.cutLastSegmentOfPath(mCurrentPath);
             updatePathText();
+        } else {
+            super.onBackPressed();
         }
     }
 

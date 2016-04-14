@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:title="@string/text_preference">
+        <CheckBoxPreference
+            android:key="@string/switch_return_key"
+            android:title="@string/switch_return"/>
+        <CheckBoxPreference
+            android:key="@string/card_note_item_layout_key"
+            android:title="@string/card_note_item_layou"
+            />
+        <CheckBoxPreference
+            android:key="@string/change_theme_key"
+            android:title="@string/change_theme"
+            />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/other"
+        >
+        <Preference
+            android:key="@string/apply_to_application_key"
+            android:title="@string/apply_to_application"
+            />
+    </PreferenceCategory>
+</PreferenceScreen>

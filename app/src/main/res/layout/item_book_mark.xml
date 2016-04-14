@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="88dp"
+    android:padding="10dp"
+    >
+
+    <TextView
+        android:id="@+id/tv_mark_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="刘春，上林繁华照眼新电视剧法律上空间的离开飞机上看到解放路口时"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        />
+    <TextView
+        android:id="@+id/tv_mark_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2011-05-30 20:38"
+        android:textSize="13sp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="5dp"
+        />
+
+</RelativeLayout>

@@ -10,7 +10,7 @@
         android:layout_height="48dp"
         android:layout_weight="1"
         android:alpha="0.99"
-        android:background="@color/main_bg_1"
+        android:background="@mipmap/bookback"
         android:orientation="horizontal"
         >
 

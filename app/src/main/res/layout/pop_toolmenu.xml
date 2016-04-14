@@ -8,7 +8,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:alpha="0.99"
-        android:background="@color/main_bg_1"
+        android:background="@mipmap/bookback"
         android:clickable="true"
         >
         <ImageView

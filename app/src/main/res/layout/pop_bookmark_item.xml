@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    >
+
+    <LinearLayout
+        android:id="@+id/pop_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:id="@+id/tv_toactivity"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="跳转至"
+            android:textSize="18sp"
+            android:textColor="#0e61aa"
+            android:gravity="center"
+            />
+
+        <TextView
+            android:id="@+id/tv_deletemark"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="删除"
+            android:textSize="18sp"
+            android:textColor="#0e61aa"
+            android:gravity="center"
+            />
+
+    </LinearLayout>
+
+</RelativeLayout>

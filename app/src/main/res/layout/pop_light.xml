@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+    >
+
+    <LinearLayout
+        android:id="@+id/ll_lightmodel"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:gravity="center"
+        >
+
+    <Button
+        android:id="@+id/btn_light"
+        android:layout_width="150dp"
+        android:layout_height="30dp"
+        android:background="@drawable/textbutton_background"
+        android:text="护眼模式"
+        />
+
+    <Button
+        android:id="@+id/btn_black"
+        android:layout_width="150dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="35dp"
+        android:background="@drawable/textbutton_background"
+        android:text="夜间模式"
+        />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_below="@id/ll_lightmodel"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:gravity="center_vertical"
+        >
+    <TextView
+        android:id="@+id/tv_light"
+        android:layout_below="@id/ll_lightmodel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="亮度"
+        android:textSize="18sp"
+        android:layout_marginLeft="25dp"
+        />
+    <android.support.v7.widget.AppCompatSeekBar
+        android:id="@+id/sk_light"
+        android:layout_below="@id/ll_lightmodel"
+        android:layout_toLeftOf="@+id/tv_light"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="18dp"
+        />
+
+    </LinearLayout>
+</RelativeLayout>

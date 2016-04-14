@@ -86,7 +86,7 @@ public class BookPageFactory {
 		m_mbBuf = new RandomAccessFile(book_file, "r").getChannel().map(FileChannel.MapMode.READ_ONLY, 0, lLen);
 		// 把数据库的初始位置取出来赋值
 		this.m_mbBufEnd = book.getBegin();//(book.getPageNo-1)*book.getPageSize
-		LogUtils.d("m_mbBufEnd   书本开始位置" + m_mbBufEnd);
+		//LogUtils.d("m_mbBufEnd   书本开始位置" + m_mbBufEnd);
 		this.m_mbBufBegin = this.m_mbBufEnd;
 		return lLen;
 	}
@@ -394,7 +394,14 @@ public class BookPageFactory {
 	}
 
 	public String getFirstLineText() {
-		return m_lines.size() > 0 ? m_lines.get(0) : "";
+		return m_lines.size() > 0 ? m_lines.get(0) + m_lines.get(1): "";
+	}
+	public void setM_textColor(int m_textColor){
+		this.m_textColor = m_textColor;
+	}
+
+	public int getM_textColor(){
+		return m_textColor;
 	}
 
 }

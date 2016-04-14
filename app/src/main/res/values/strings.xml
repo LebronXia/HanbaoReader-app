@@ -1,6 +1,17 @@
 <resources>
-    <string name="app_name">HanbaoReader-app</string>
+    <string name="app_name">指读</string>
     <string name="action_settings">Settings</string>
     <string name="type_directory">Directory</string>
     <string name="type_document">File</string>
+    
+    <string name="text_preference">偏好</string>
+    <string name="switch_return_key">switch_return_key</string>
+    <string name="switch_return">滑动退出</string>
+    <string name="card_note_item_layout_key">card_note_item_layout_key</string>
+    <string name="card_note_item_layou">卡片列表</string>
+    <string name="change_theme_key">chage_theme_key</string>
+    <string name="change_theme">改变主题</string>
+    <string name="other">其他</string>
+    <string name="apply_to_application_key">apply_to_application_key</string>
+    <string name="apply_to_application">给应用去打分</string>
 </resources>

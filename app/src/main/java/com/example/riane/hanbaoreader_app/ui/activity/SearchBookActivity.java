@@ -142,12 +142,12 @@ public class SearchBookActivity extends BaseActivity {
             if (mFileItems.get(i).isChecked() == true){
                 String filename = mFileItems.get(i).getFileName();
                 String filepath = mFileItems.get(i).getFilepath();
-
+                    mFileItems.get(i).setIsImport(true);
                     Book book = new Book(filename,filepath, new Date(), 0, "0.00%");
                     bookDao.add(book);
-
             }
         }
+        mSearchResultAdapter.notifyDataSetChanged();
     }
 
     public static Intent getCallingIntent(Context context, ArrayList<String> searchitems){
@@ -162,5 +162,6 @@ public class SearchBookActivity extends BaseActivity {
         super.onPause();
         mFileItems = null;
         mSearchitems = null;
+        finish();
     }
 }
