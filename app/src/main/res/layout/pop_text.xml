@@ -6,13 +6,14 @@
          android:layout_width="match_parent"
          android:layout_height="60dp"
          android:orientation="horizontal"
-         android:background="@color/white">
+         android:background="@mipmap/bookback">
 
          <TextView
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:text="字号"
              android:textSize="14sp"
+             android:textColor="@color/white"
              android:layout_gravity="center_vertical"
              android:layout_marginLeft="12dp"
              />
@@ -23,7 +24,7 @@
              android:layout_height="30dp"
              android:background="@drawable/textbutton_background"
              android:layout_gravity="center_vertical"
-             android:layout_marginLeft="15dp"
+             android:layout_marginLeft="50dp"
              android:text="小"
              />
          <TextView
@@ -34,6 +35,7 @@
              android:layout_marginRight="15dp"
              android:text="13"
              android:textSize="15dp"
+             android:textColor="@color/white"
              android:layout_gravity="center_vertical"
              />
          <Button

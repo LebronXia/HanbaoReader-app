@@ -3,6 +3,7 @@ package com.example.riane.hanbaoreader_app.cache;
 import android.content.Context;
 
 import com.example.riane.hanbaoreader_app.modle.Book;
+import com.example.riane.hanbaoreader_app.modle.BookMark;
 import com.j256.ormlite.dao.Dao;
 
 import java.sql.SQLException;
@@ -67,13 +68,12 @@ public class BookDao {
     }
 
     //删除一本书
-    public void delete(int id){
+    public void delete(Book book){
         try {
-            bookDaoOpe.deleteById(id);
+            bookDaoOpe.delete(book);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
 
     //更新一本书

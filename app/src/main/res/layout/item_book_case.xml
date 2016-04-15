@@ -42,7 +42,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_itemtext"
             android:layout_marginTop="10dp"
-            android:text="已读1.11%"
+            android:text="已读11.11%"
             android:layout_centerHorizontal="true"
             />
     </RelativeLayout>

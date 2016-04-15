@@ -12,6 +12,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Switch;
 
 import com.example.riane.hanbaoreader_app.R;
 import com.example.riane.hanbaoreader_app.app.BaseActivity;
@@ -72,7 +73,8 @@ public class MainActivity extends BaseActivity {
             }
         });
 
-        titleView.setBtn_hamburger(new View.OnClickListener() {
+        titleView.setBtn_hamburger(
+                new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mDrawerLayout.openDrawer(GravityCompat.START);
@@ -82,7 +84,23 @@ public class MainActivity extends BaseActivity {
         mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
-                menuItem.setChecked(true);
+                //menuItem.setChecked(true);
+                switch(menuItem.getItemId()){
+                    case R.id.nav_menu_setting:
+                        Intent settingIntent = new Intent(MainActivity.this, SettingsActivity.class);
+                        settingIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(settingIntent);
+                        break;
+                    case R.id.nav_menu_placebook:
+                        Intent placeBookIntent = new Intent(MainActivity.this, PlaceBookActivity.class);
+                        placeBookIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(placeBookIntent);
+                        break;
+                    default:
+                        break;
+                }
+
+
                 mDrawerLayout.closeDrawers();
                 return false;
             }

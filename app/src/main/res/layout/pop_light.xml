@@ -3,7 +3,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-
+    android:background="@mipmap/bookback"
     >
 
     <LinearLayout
@@ -46,6 +46,7 @@
         android:layout_height="wrap_content"
         android:text="亮度"
         android:textSize="18sp"
+        android:textColor="@color/white"
         android:layout_marginLeft="25dp"
         />
     <android.support.v7.widget.AppCompatSeekBar

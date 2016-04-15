@@ -10,6 +10,12 @@
             />
 
         <item
+            android:id="@+id/nav_menu_placebook"
+            android:icon="@mipmap/ic_placebook"
+            android:title="归档"
+            />
+
+        <item
             android:id="@+id/nav_menu_setting"
             android:icon="@mipmap/ic_setting"
             android:title="设置"

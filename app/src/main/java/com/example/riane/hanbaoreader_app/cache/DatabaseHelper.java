@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.example.riane.hanbaoreader_app.modle.Book;
 import com.example.riane.hanbaoreader_app.modle.BookMark;
+import com.example.riane.hanbaoreader_app.modle.BookTag;
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.support.ConnectionSource;
@@ -32,6 +33,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper{
         try{
             TableUtils.createTable(connectionSource,Book.class);
             TableUtils.createTable(connectionSource, BookMark.class);
+            TableUtils.createTable(connectionSource, BookTag.class);
         } catch (SQLException e){
             e.printStackTrace();
         }
@@ -44,6 +46,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper{
         try{
             TableUtils.dropTable(connectionSource,Book.class,true);
             TableUtils.dropTable(connectionSource,BookMark.class,true);
+            TableUtils.dropTable(connectionSource,BookTag.class,true);
             onCreate(database, connectionSource);
         }catch (SQLException e){
             e.printStackTrace();
