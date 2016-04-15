@@ -7,6 +7,6 @@ import rx.Observable;
  * Created by Riane on 2016/4/15.
  */
 public class BookApi {
-    //@GET(URL_ALLBOOK)
-    //Observable<> get
+//    @GET(URL_ALLBOOK)
+//    Observable<> get
 }

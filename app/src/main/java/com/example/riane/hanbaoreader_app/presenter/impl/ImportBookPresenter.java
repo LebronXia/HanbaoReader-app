@@ -16,6 +16,11 @@ public class ImportBookPresenter implements Presenter{
         this.mImportBookView = (ImportBookView)view;
     }
 
+    @Override
+    public void detachView() {
+
+    }
+
     public void initRecyclerView(){
         mImportBookView.initRecyclerView();
     }

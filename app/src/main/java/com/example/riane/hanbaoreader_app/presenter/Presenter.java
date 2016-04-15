@@ -7,4 +7,6 @@ import android.view.View;
  */
 public interface Presenter {
     void attachView(View view);
+
+    void detachView();
 }
