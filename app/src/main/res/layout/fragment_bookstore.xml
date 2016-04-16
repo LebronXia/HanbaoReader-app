@@ -6,21 +6,22 @@
                 android:orientation="vertical"
     >
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <!--<android.support.v7.widget.RecyclerView-->
+        <!--android:id="@+id/recycler_view"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent">-->
 
-    </android.support.v7.widget.RecyclerView>
+    <!--</android.support.v7.widget.RecyclerView>-->
+
+
 
     <android.support.v4.widget.ContentLoadingProgressBar
         android:id="@+id/progre_wheel"
         android:layout_width="75dp"
         android:layout_height="75dp"
+        style="?android:attr/progressBarStyleLarge"
         android:layout_centerInParent="true"
         android:visibility="visible"
         />
-
-
 
 </RelativeLayout>
