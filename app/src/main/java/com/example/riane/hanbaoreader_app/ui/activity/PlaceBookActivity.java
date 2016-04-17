@@ -11,7 +11,9 @@ import com.example.riane.hanbaoreader_app.R;
 import com.example.riane.hanbaoreader_app.app.BaseActivity;
 import com.example.riane.hanbaoreader_app.cache.BookTagDao;
 import com.example.riane.hanbaoreader_app.modle.BookTag;
+import com.example.riane.hanbaoreader_app.util.LogUtils;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -51,9 +53,18 @@ public class PlaceBookActivity extends BaseActivity {
 
         bookTagDao = new BookTagDao(PlaceBookActivity.this);
         bookTagList = bookTagDao.getAll();
+        List<String> list = null;
         if (bookTagList == null || bookTagList.size() < 1) {
             String[] res = new String[]{"玄幻","言情","武侠","科幻","历史","科学"};
-            List<String> list = Arrays.asList(res);
+            list = Arrays.asList(res);
+        } else {
+            List<BookTag> bookTags = bookTagDao.getAll();
+            //LogUtils.d("bookTag + "bookTags.get(0).getBookTag());
+            list = new ArrayList<>();
+            for (BookTag tag : bookTags){
+                LogUtils.d("bookTag + " + tag.getBookTag());
+                list.add(tag.getBookTag());
+            }
             arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,list);
             arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             spinner.setAdapter(arrayAdapter);

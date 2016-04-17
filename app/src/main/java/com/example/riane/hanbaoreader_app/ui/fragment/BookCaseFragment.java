@@ -1,6 +1,5 @@
 package com.example.riane.hanbaoreader_app.ui.fragment;
 
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -9,31 +8,33 @@ import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import com.example.riane.hanbaoreader_app.R;
 import com.example.riane.hanbaoreader_app.app.BaseFragment;
 import com.example.riane.hanbaoreader_app.cache.BookDao;
 import com.example.riane.hanbaoreader_app.cache.BookTagDao;
 import com.example.riane.hanbaoreader_app.modle.Book;
+import com.example.riane.hanbaoreader_app.modle.BookTag;
 import com.example.riane.hanbaoreader_app.ui.activity.ReadBookActivity;
 import com.example.riane.hanbaoreader_app.ui.adapter.BookCaseAdapter;
 import com.example.riane.hanbaoreader_app.util.LogUtils;
+import com.example.riane.hanbaoreader_app.util.SPUtils;
 import com.example.riane.hanbaoreader_app.util.ToastUtils;
 import com.example.riane.hanbaoreader_app.widget.FlowLayout;
 
 import java.io.File;
-import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.logging.LogRecord;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -54,6 +55,8 @@ public class BookCaseFragment extends BaseFragment {
     private BookTagDao bookTagDao;
     private ProgressDialog dialog;
     private AlertDialog classDialog;
+    public static boolean isCardVIew = false;
+    String textTag;
 
     private Handler mHandler = new Handler() {
         @Override
@@ -83,10 +86,18 @@ public class BookCaseFragment extends BaseFragment {
     }
 
     public void initRecycleView(){
-        //创建默认的线性LayoutManager
+        //平铺视图GridLayoutManager
+        if (isCardVIew){
+            GridLayoutManager layout = new GridLayoutManager(getActivity(),3);
+            mRecyclerView.setLayoutManager(layout);
+        }  else {
+            //创建默认的线性LayoutManager
+            LinearLayoutManager layout = new LinearLayoutManager(getActivity());
+            mRecyclerView.setLayoutManager(layout);
+        }
         //GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(),3);
-        StaggeredGridLayoutManager layout = new StaggeredGridLayoutManager(3,StaggeredGridLayoutManager.VERTICAL);
-        mRecyclerView.setLayoutManager(layout);
+        //StaggeredGridLayoutManager layout = new StaggeredGridLayoutManager(3,StaggeredGridLayoutManager.VERTICAL);
+
         //如果确定每个item的高度是固定的，设置这个选项可以提高性能
         mRecyclerView.setHasFixedSize(true);
         mCaseAdapter = new BookCaseAdapter(getActivity(),mDatas);
@@ -125,29 +136,52 @@ public class BookCaseFragment extends BaseFragment {
                     bookDao.delete(mDatas.get(position));
                     mCaseAdapter.notifyDataSetChanged();
                 } else if (items[which].equals("归档图书")){
-                    showClassifyDialog();
+                    showClassifyDialog(position);
                 }
             }
         });
         builder.create().show();
     }
 
-    private void showClassifyDialog(){
+    private void showClassifyDialog(final int position){
+
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("归档图书");
-        String[] res = new String[]{"玄幻","言情","武侠","科幻","历史","科学"};
-        List<String> list = Arrays.asList(res);
-        View view = LayoutInflater.from(getActivity()).inflate(R.layout.layout_dialog_classify, null);
+        List<String> list = null;
+        if (bookTagDao.getAll().size() < 1){
+            String[] res = new String[]{"玄幻","言情","武侠","科幻","历史","科学"};
+            list = Arrays.asList(res);
+        } else {
+            List<BookTag> bookTags = bookTagDao.getAll();
+            //LogUtils.d("bookTag + "bookTags.get(0).getBookTag());
+            list = new ArrayList<>();
+            for (BookTag tag : bookTags){
+                LogUtils.d("bookTag + " + tag.getBookTag());
+                list.add(tag.getBookTag());
+            }
+        }
+
+        final View view = LayoutInflater.from(getActivity()).inflate(R.layout.layout_dialog_classify, null);
         FlowLayout flowLayout = (FlowLayout) view.findViewById(R.id.fl_classlist);
+
+        Button btn_class = (Button) view.findViewById(R.id.dialog_btn_class);
         flowLayout.setHorizontalSpacing(10);
         flowLayout.setVerticalSpacing(20);
-        for (String re : list){
+        for (final String re : list){
             Button classButton = new Button(getActivity());
             classButton.setText(re);
             classButton.setWidth(30);
             classButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    if (bookTagDao.getBookTag(mDatas.get(position).getFilePath())== null){
+                        BookTag bookTag = new BookTag(mDatas.get(position).getFilePath(),re);
+                        bookTagDao.add(bookTag);
+                    } else {
+                        BookTag bookTag = new BookTag(mDatas.get(position).getFilePath(),re);
+                        bookTagDao.update(bookTag);
+                    }
+
                     //回调吗
                     Message message = new Message();
                     message.what = DIALOG_BUTTON;
@@ -159,6 +193,24 @@ public class BookCaseFragment extends BaseFragment {
 
         builder.setView(view);
         classDialog = builder.show();
+        btn_class.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                classDialog.dismiss();
+                EditText et_class = (EditText) view.findViewById(R.id.dialog_et_class);
+                //查看标签是否存在，不存在则插入，存在则更新
+                if (bookTagDao.getBookTag(mDatas.get(position).getFilePath())== null){
+                    textTag = et_class.getText().toString().trim();
+                    BookTag bookTag = new BookTag(mDatas.get(position).getFilePath(),textTag);
+                    bookTagDao.add(bookTag);
+                } else {
+                    textTag = et_class.getText().toString().trim();
+                    LogUtils.d("更新书的标签" + textTag);
+                    BookTag bookTag = new BookTag(mDatas.get(position).getFilePath(),textTag);
+                    bookTagDao.update(bookTag);
+                }
+            }
+        });
     }
 
     private void initDatas() {
@@ -172,6 +224,8 @@ public class BookCaseFragment extends BaseFragment {
             rl_emptyView.setVisibility(View.GONE);
             mRecyclerView.setVisibility(View.VISIBLE);
         }
+        isCardVIew = (boolean) SPUtils.get(getActivity(), "IS_CARD", false);
+        LogUtils.d("isCardView+" + isCardVIew);
     }
 
     //阅读
@@ -183,8 +237,10 @@ public class BookCaseFragment extends BaseFragment {
             ToastUtils.showShort(getActivity(), "文件不存在");
             dialog.dismiss();
             return;
+        } else {
+            dialog.dismiss();
+            startActivity(ReadBookActivity.getCallingIntent(getActivity(), book));
         }
-        dialog.dismiss();
-       startActivity(ReadBookActivity.getCallingIntent(getActivity(), book));
+
     }
 }

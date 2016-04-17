@@ -14,6 +14,15 @@ public class BookTag {
     private String bookPath;
     @DatabaseField(columnName = "bookTag")
     private String bookTag;
+    @DatabaseField(columnName = "isChecked")
+    private String isChecked;
+
+    private BookTag(){};
+
+    public BookTag(String bookPath, String bookTag) {
+        this.bookPath = bookPath;
+        this.bookTag = bookTag;
+    }
 
     public String getBookPath() {
         return bookPath;

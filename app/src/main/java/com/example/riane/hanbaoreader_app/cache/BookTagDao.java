@@ -2,6 +2,7 @@ package com.example.riane.hanbaoreader_app.cache;
 
 import android.content.Context;
 
+import com.example.riane.hanbaoreader_app.modle.Book;
 import com.example.riane.hanbaoreader_app.modle.BookMark;
 import com.example.riane.hanbaoreader_app.modle.BookTag;
 import com.j256.ormlite.dao.Dao;
@@ -42,5 +43,32 @@ public class BookTagDao {
             e.printStackTrace();
         }
         return null;
+    }
+
+    //查询一本书标签
+    public BookTag getBookTag(String bookPath){
+        List<BookTag> bookTagList = null;
+        BookTag bookTag = null;
+        try {
+            //bookList = bookDaoOpe.queryBuilder().where().eq("name",name).query();
+            bookTagList = bookTagDaoOpe.queryBuilder().where().eq("bookPath",bookPath).query();
+            if(bookTagList != null && bookTagList.size() >  0){
+                bookTag = bookTagList.get(0);
+                return bookTag;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    //更新一本书标签
+    public void update(BookTag bookTag){
+        try {
+            bookTagDaoOpe.update(bookTag);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

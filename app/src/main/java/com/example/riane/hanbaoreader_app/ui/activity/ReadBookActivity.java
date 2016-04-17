@@ -333,12 +333,12 @@ public class ReadBookActivity extends BaseActivity implements View.OnClickListen
                     showTextToast("已经添加过了");
                 }
 
-//                st<BookMark> bookMarklist = bookMarkDao.getAll();
-//                if (bookMarklist != null && bookMarklist.size() > 0){
-//
-//                }Li
-
                 break;
+            //返回键
+            case R.id.iv_bookhome:
+                backPress();
+                break;
+
             //目录按钮
             case R.id.iv_bookmenu:
                 startActivity(BookmenuActivity.getCallingIntent(ReadBookActivity.this));
@@ -540,7 +540,7 @@ public class ReadBookActivity extends BaseActivity implements View.OnClickListen
 
     //回退
     public void backPress() {
-        startActivity(MainActivity.getCallingIntent(this));
+        super.onBackPressed();
         ReadBookActivity.this.finish();
     }
 
