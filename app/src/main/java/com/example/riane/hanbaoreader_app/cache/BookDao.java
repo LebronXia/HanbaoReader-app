@@ -67,6 +67,19 @@ public class BookDao {
         return bookList;
     }
 
+    //查询一本书
+    public Book getBookBybookPath(String bookPath){
+        List<Book> bookList = null;
+        Book book = null;
+        try {
+            bookList = bookDaoOpe.queryBuilder().where().eq("file_path",bookPath).query();
+            book = bookList.get(0);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return book;
+    }
+
     //删除一本书
     public void delete(Book book){
         try {

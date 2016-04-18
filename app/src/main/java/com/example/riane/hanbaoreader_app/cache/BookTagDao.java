@@ -63,6 +63,16 @@ public class BookTagDao {
         return null;
     }
 
+    //根据书的标签返回书
+    public List<BookTag> getBookTagBytag(String tv_bookTag){
+        try {
+            return bookTagDaoOpe.queryBuilder().where().eq("bookTag",tv_bookTag).query();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     //更新一本书标签
     public void update(BookTag bookTag){
         try {
