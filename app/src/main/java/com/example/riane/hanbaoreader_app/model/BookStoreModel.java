@@ -14,6 +14,9 @@ import com.example.riane.hanbaoreader_app.util.LogUtils;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -45,7 +48,7 @@ public class BookStoreModel {
 
         retrofit = new Retrofit.Builder()
                 .client(builder. build())
-                .baseUrl(Constant.BASEURL)
+                .baseUrl(Constant.SCHOOL_BASEURL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
@@ -71,7 +74,7 @@ public class BookStoreModel {
 
                     @Override
                     public void onNext(UserVO userVO) {
-                        LogUtils.d("下载中");
+                        LogUtils.d("下载中"+ userVO.getName());
                         mIBookStorePresent.loadDataSuccess(userVO);
                     }
                 });
@@ -81,7 +84,7 @@ public class BookStoreModel {
     private class HttpResultFunc<T> implements Func1<HttpResult<T> ,T>{
         @Override
         public T call(HttpResult<T> httpResult) {
-            if (httpResult.getResultCode() == 0){
+            if (httpResult.getResultCode() != 0){
                 throw new RuntimeException();
             }
             return httpResult.getObject();

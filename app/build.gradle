@@ -73,5 +73,5 @@ dependencies {
     compile project(':library')        //check视图
     compile project(':shapeloading')  //等待视图
     compile 'konifar:fab-transformation:1.0.0' //菜单按钮
-    compile 'com.google.android.gms:play-services-appindexing:8.1.0'
+    compile 'com.yalantis:phoenix:1.2.2'   //下拉刷新
 }

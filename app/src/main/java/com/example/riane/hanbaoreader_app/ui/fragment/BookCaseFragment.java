@@ -28,6 +28,7 @@ import com.example.riane.hanbaoreader_app.ui.adapter.BookCaseAdapter;
 import com.example.riane.hanbaoreader_app.util.LogUtils;
 import com.example.riane.hanbaoreader_app.util.ToastUtils;
 import com.example.riane.hanbaoreader_app.widget.FlowLayout;
+import com.ogaclejapan.smarttablayout.SmartTabLayout;
 
 import java.io.File;
 import java.lang.reflect.Array;
@@ -49,6 +50,7 @@ public class BookCaseFragment extends BaseFragment {
     private BookCaseAdapter mCaseAdapter;
     @Bind(R.id.empty_view)
     RelativeLayout rl_emptyView;
+
     private List<Book> mDatas;
     private BookDao bookDao;
     private BookTagDao bookTagDao;
@@ -83,6 +85,8 @@ public class BookCaseFragment extends BaseFragment {
     }
 
     public void initRecycleView(){
+       // mSmartTabLayout = (SmartTabLayout) getActivity().findViewById(R.id.tab_layout);
+
         //创建默认的线性LayoutManager
         //GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(),3);
         StaggeredGridLayoutManager layout = new StaggeredGridLayoutManager(3,StaggeredGridLayoutManager.VERTICAL);

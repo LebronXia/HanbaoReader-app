@@ -19,8 +19,9 @@ public interface BookApi {
 //    @GET(URL_ALLBOOK)
 //    Observable<BookVO> getBook();
 
+
+
     @GET(Constant.URL_USER)
     Observable<HttpResult<UserVO>> getUser(@Path("name") String name);
-//    @GET(Constant.URL_USER)
-//    Call<>
+
 }
