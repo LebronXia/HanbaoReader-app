@@ -7,6 +7,8 @@ import com.example.riane.hanbaoreader_app.presenter.IBookStorePresenter;
 import com.example.riane.hanbaoreader_app.presenter.Presenter;
 import com.example.riane.hanbaoreader_app.view.impl.BookStoreView;
 
+import java.util.List;
+
 /**
  * Created by Riane on 2016/4/15.
  *
@@ -32,19 +34,21 @@ public class BookStorePresent implements Presenter<BookStoreView>,IBookStorePres
         this.bookStoreView = null;
     }
 
-    public void loadData(){
+    public void loadData(String tag){
         bookStoreView.showProgress();
-        mBookStoreModel.loadData();
+        mBookStoreModel.loadData(tag);
     }
 
     @Override
-    public void loadDataSuccess(UserVO bookVO) {
-        bookStoreView.showData(bookVO);
+    public void loadDataSuccess(List<BookVO> bookVOs) {
+        bookStoreView.showData(bookVOs);
         bookStoreView.hideProgress();
+        bookStoreView.hideLoadEmpty();
     }
 
     @Override
     public void loadDataFailure() {
         bookStoreView.hideProgress();
+        bookStoreView.showLoadEmpty();
     }
 }

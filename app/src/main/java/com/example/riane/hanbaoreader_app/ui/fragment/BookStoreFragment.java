@@ -12,6 +12,7 @@ import com.example.riane.hanbaoreader_app.R;
 import com.example.riane.hanbaoreader_app.app.BaseFragment;
 import com.example.riane.hanbaoreader_app.config.Constant;
 import com.example.riane.hanbaoreader_app.ui.adapter.PagerAdapter;
+import com.example.riane.hanbaoreader_app.util.LogUtils;
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
 
 import java.util.ArrayList;
@@ -46,6 +47,8 @@ public class BookStoreFragment extends BaseFragment {
             public Fragment getItem(int position) {
                 BookListFragment fragment = new BookListFragment();
                 Bundle bundle = new Bundle();
+                LogUtils.d("Item + " + position);
+                LogUtils.d("Item + " + Constant.Tag_Titles[position]);
                 bundle.putInt(id_pos, position);
                 bundle.putString(id_category, Constant.Tag_Titles[position]);
                 fragment.setArguments(bundle);
@@ -55,6 +58,12 @@ public class BookStoreFragment extends BaseFragment {
         mInnerViewpager.setAdapter(mPagerAdapter);
         mSmartTabLayout.setViewPager(mInnerViewpager);
         return parentView;
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mSmartTabLayout.setVisibility(View.GONE);
     }
 
     @Override

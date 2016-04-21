@@ -8,8 +8,8 @@ public class Constant {
 
     public static final String BASEURL = "http://192.168.1.103:8080/reader/";
     public static final String SCHOOL_BASEURL = "http://10.66.95.229:8080/reader/";
-    public static final String URL_ALLBOOK = "";
     public static final String URL_USER = "books/hello1/{name}";
+    public static final String URL_BOOK = "books/search/{tag}";
 
     public  static String Tag_Titles [] = {"综合","文学","程序员","流行","文化","生活","金融"};
 }

@@ -3,6 +3,8 @@ package com.example.riane.hanbaoreader_app.model;
 import android.widget.Toast;
 
 import com.example.riane.hanbaoreader_app.config.Constant;
+import com.example.riane.hanbaoreader_app.modle.Book;
+import com.example.riane.hanbaoreader_app.modle.entity.BookVO;
 import com.example.riane.hanbaoreader_app.modle.entity.HttpResult;
 import com.example.riane.hanbaoreader_app.modle.entity.UserVO;
 import com.example.riane.hanbaoreader_app.network.BookApi;
@@ -11,6 +13,7 @@ import com.example.riane.hanbaoreader_app.presenter.impl.BookStorePresent;
 import com.example.riane.hanbaoreader_app.util.LogUtils;
 
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
@@ -40,7 +43,7 @@ public class BookStoreModel {
         this.mIBookStorePresent = iBookStorePresent;
     }
 
-    public void loadData(){
+    public void loadData(String tag){
 
         //手建一个OKHttpClient并设置超时时间
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
@@ -55,12 +58,12 @@ public class BookStoreModel {
 
         BookApi bookApi = retrofit.create(BookApi.class);
 
-        bookApi.getUser("haha")
-                .map(new HttpResultFunc<UserVO>())
+        bookApi.getUser(tag)
+                .map(new HttpResultFunc<List<BookVO>>())
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<UserVO>() {
+                .subscribe(new Subscriber<List<BookVO>>() {
                     @Override
                     public void onCompleted() {
                         LogUtils.d("到达");
@@ -73,9 +76,11 @@ public class BookStoreModel {
                     }
 
                     @Override
-                    public void onNext(UserVO userVO) {
-                        LogUtils.d("下载中"+ userVO.getName());
-                        mIBookStorePresent.loadDataSuccess(userVO);
+                    public void onNext(List<BookVO> bookVOs) {
+                        if (bookVOs != null || bookVOs.size() > 1){
+                            LogUtils.d("下载中"+ bookVOs.get(0).getName());
+                            mIBookStorePresent.loadDataSuccess(bookVOs);
+                        }
                     }
                 });
     }

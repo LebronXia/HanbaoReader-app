@@ -6,6 +6,8 @@ import com.example.riane.hanbaoreader_app.modle.entity.HttpResult;
 import com.example.riane.hanbaoreader_app.modle.entity.UserVO;
 
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
@@ -21,7 +23,7 @@ public interface BookApi {
 
 
 
-    @GET(Constant.URL_USER)
-    Observable<HttpResult<UserVO>> getUser(@Path("name") String name);
+    @GET(Constant.URL_BOOK)
+    Observable<HttpResult<List<BookVO>>> getUser(@Path("tag") String tag);
 
 }

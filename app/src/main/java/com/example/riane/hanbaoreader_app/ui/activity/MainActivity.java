@@ -37,8 +37,8 @@ public class MainActivity extends BaseActivity {
     DrawerLayout mDrawerLayout;
     @Bind(R.id.nv_menu)
     NavigationView mNavigationView;
-    @Bind(R.id.tab_layout)
-    SmartTabLayout mSmartTabLayout;
+//    @Bind(R.id.tab_layout)
+//    SmartTabLayout mSmartTabLayout;
 
     private Fragment mContent;
     private BookCaseFragment mBookCaseFragment= new BookCaseFragment();
@@ -65,7 +65,7 @@ public class MainActivity extends BaseActivity {
         titleView.setFirsttabListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mSmartTabLayout.setVisibility(View.GONE);
+                //mSmartTabLayout.setVisibility(View.GONE);
                 switchcontent(mBookStoreFragment, mBookCaseFragment);
             }
         });
@@ -73,7 +73,7 @@ public class MainActivity extends BaseActivity {
         titleView.setSecondtabListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mSmartTabLayout.setVisibility(View.VISIBLE);
+               // mSmartTabLayout.setVisibility(View.VISIBLE);
                 switchcontent(mBookCaseFragment, mBookStoreFragment);
             }
         });

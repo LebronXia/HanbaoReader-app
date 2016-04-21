@@ -19,6 +19,17 @@
             />
     </com.yalantis.phoenix.PullToRefreshView>
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="128dp">
+        <include
+            layout="@layout/include_empty"/>
+
+        <include
+            layout="@layout/include_error"/>
+    </FrameLayout>
+
     <android.support.v4.widget.ContentLoadingProgressBar
     android:id="@+id/progre_wheel"
     android:layout_width="75dp"
