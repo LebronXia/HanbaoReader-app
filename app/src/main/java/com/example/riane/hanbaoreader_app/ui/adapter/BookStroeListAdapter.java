@@ -48,7 +48,7 @@ public class BookStroeListAdapter extends RecyclerView.Adapter<BookStroeListAdap
     @Override
     public void onBindViewHolder(final BookStoreViewHolder holder, int position) {
        // holder.mImg.setImageResource(R.mipmap.cover_txt);
-        Glide.with(mContext).load(Constant.SCHOOL_BASEURL + mDatas.get(position).getPicture())
+        Glide.with(mContext).load(Constant.BASEURL + mDatas.get(position).getPicture())
                 .placeholder(R.mipmap.cover_txt)
                 .crossFade()
                 .into(holder.mImg);

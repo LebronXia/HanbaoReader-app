@@ -56,6 +56,7 @@ public class BookCaseFragment extends BaseFragment {
     private BookTagDao bookTagDao;
     private ProgressDialog dialog;
     private AlertDialog classDialog;
+    private SmartTabLayout mSmartTabLayout;
 
     private Handler mHandler = new Handler() {
         @Override
@@ -87,6 +88,8 @@ public class BookCaseFragment extends BaseFragment {
     public void initRecycleView(){
        // mSmartTabLayout = (SmartTabLayout) getActivity().findViewById(R.id.tab_layout);
 
+        mSmartTabLayout = (SmartTabLayout) getActivity().findViewById(R.id.tab_layout);
+        mSmartTabLayout.setVisibility(View.GONE);
         //创建默认的线性LayoutManager
         //GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(),3);
         StaggeredGridLayoutManager layout = new StaggeredGridLayoutManager(3,StaggeredGridLayoutManager.VERTICAL);

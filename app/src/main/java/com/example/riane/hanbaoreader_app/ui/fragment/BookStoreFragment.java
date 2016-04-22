@@ -47,8 +47,8 @@ public class BookStoreFragment extends BaseFragment {
             public Fragment getItem(int position) {
                 BookListFragment fragment = new BookListFragment();
                 Bundle bundle = new Bundle();
-                LogUtils.d("Item + " + position);
-                LogUtils.d("Item + " + Constant.Tag_Titles[position]);
+              //  LogUtils.d("Item + " + position);
+               // LogUtils.d("Item + " + Constant.Tag_Titles[position]);
                 bundle.putInt(id_pos, position);
                 bundle.putString(id_category, Constant.Tag_Titles[position]);
                 fragment.setArguments(bundle);
@@ -63,7 +63,7 @@ public class BookStoreFragment extends BaseFragment {
     @Override
     public void onPause() {
         super.onPause();
-        mSmartTabLayout.setVisibility(View.GONE);
+
     }
 
     @Override
@@ -71,6 +71,7 @@ public class BookStoreFragment extends BaseFragment {
         super.onDetach();
         if(getChildFragmentManager().getFragments()!=null){
             getChildFragmentManager().getFragments().clear();
+            mSmartTabLayout.setVisibility(View.GONE);
         }
     }
 

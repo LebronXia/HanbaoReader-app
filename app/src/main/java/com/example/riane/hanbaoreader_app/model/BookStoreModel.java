@@ -51,7 +51,7 @@ public class BookStoreModel {
 
         retrofit = new Retrofit.Builder()
                 .client(builder. build())
-                .baseUrl(Constant.SCHOOL_BASEURL)
+                .baseUrl(Constant.BASEURL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
