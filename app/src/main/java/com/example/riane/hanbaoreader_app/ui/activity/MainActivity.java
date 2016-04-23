@@ -19,6 +19,7 @@ import com.example.riane.hanbaoreader_app.app.BaseActivity;
 import com.example.riane.hanbaoreader_app.ui.fragment.BookCaseFragment;
 import com.example.riane.hanbaoreader_app.ui.fragment.BookStoreFragment;
 import com.example.riane.hanbaoreader_app.widget.MyTitleView;
+import com.ogaclejapan.smarttablayout.SmartTabLayout;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -36,6 +37,8 @@ public class MainActivity extends BaseActivity {
     DrawerLayout mDrawerLayout;
     @Bind(R.id.nv_menu)
     NavigationView mNavigationView;
+    @Bind(R.id.tab_layout)
+    SmartTabLayout mSmartTabLayout;
 
     private Fragment mContent;
     private BookCaseFragment mBookCaseFragment= new BookCaseFragment();
@@ -62,6 +65,7 @@ public class MainActivity extends BaseActivity {
         titleView.setFirsttabListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mSmartTabLayout.setVisibility(View.GONE);
                 switchcontent(mBookStoreFragment, mBookCaseFragment);
             }
         });
@@ -69,6 +73,7 @@ public class MainActivity extends BaseActivity {
         titleView.setSecondtabListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mSmartTabLayout.setVisibility(View.VISIBLE);
                 switchcontent(mBookCaseFragment, mBookStoreFragment);
             }
         });

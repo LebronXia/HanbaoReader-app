@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/rl_booklist"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <com.yalantis.phoenix.PullToRefreshView
+        android:id="@+id/pull_to_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:scrollbars="vertical"
+            />
+    </com.yalantis.phoenix.PullToRefreshView>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="128dp">
+        <include
+            layout="@layout/include_empty"/>
+
+        <include
+            layout="@layout/include_error"/>
+    </FrameLayout>
+
+    <android.support.v4.widget.ContentLoadingProgressBar
+    android:id="@+id/progre_wheel"
+    android:layout_width="75dp"
+    android:layout_height="75dp"
+    style="?android:attr/progressBarStyleLarge"
+    android:layout_centerInParent="true"
+    />
+
+</RelativeLayout>

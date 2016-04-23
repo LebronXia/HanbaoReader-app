@@ -30,6 +30,7 @@ import com.example.riane.hanbaoreader_app.util.LogUtils;
 import com.example.riane.hanbaoreader_app.util.SPUtils;
 import com.example.riane.hanbaoreader_app.util.ToastUtils;
 import com.example.riane.hanbaoreader_app.widget.FlowLayout;
+import com.ogaclejapan.smarttablayout.SmartTabLayout;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -50,6 +51,7 @@ public class BookCaseFragment extends BaseFragment {
     private BookCaseAdapter mCaseAdapter;
     @Bind(R.id.empty_view)
     RelativeLayout rl_emptyView;
+
     private List<Book> mDatas;
     private BookDao bookDao;
     private BookTagDao bookTagDao;
@@ -57,6 +59,7 @@ public class BookCaseFragment extends BaseFragment {
     private AlertDialog classDialog;
     public static boolean isCardVIew = false;
     String textTag;
+    private SmartTabLayout mSmartTabLayout;
 
     private Handler mHandler = new Handler() {
         @Override
@@ -95,6 +98,11 @@ public class BookCaseFragment extends BaseFragment {
             LinearLayoutManager layout = new LinearLayoutManager(getActivity());
             mRecyclerView.setLayoutManager(layout);
         }
+       // mSmartTabLayout = (SmartTabLayout) getActivity().findViewById(R.id.tab_layout);
+
+        mSmartTabLayout = (SmartTabLayout) getActivity().findViewById(R.id.tab_layout);
+        mSmartTabLayout.setVisibility(View.GONE);
+        //创建默认的线性LayoutManager
         //GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(),3);
         //StaggeredGridLayoutManager layout = new StaggeredGridLayoutManager(3,StaggeredGridLayoutManager.VERTICAL);
 

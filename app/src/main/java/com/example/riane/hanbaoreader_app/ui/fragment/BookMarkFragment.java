@@ -50,7 +50,6 @@ public class BookMarkFragment extends Fragment{
         view = inflater.inflate(R.layout.fragment_bookmenu,container,false);
         ButterKnife.bind(this, view);
         initData();
-
         return view;
     }
 

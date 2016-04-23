@@ -5,8 +5,8 @@ import android.view.View;
 /**
  * Created by Xiamu on 2016/3/26.
  */
-public interface Presenter {
-    void attachView(View view);
+public interface Presenter<V> {
+    void attachView(V view);
 
     void detachView();
 }

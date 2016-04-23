@@ -8,12 +8,12 @@ import com.example.riane.hanbaoreader_app.view.impl.ImportBookView;
 /**
  * Created by Xiamu on 2016/3/26.
  */
-public class ImportBookPresenter implements Presenter{
+public class ImportBookPresenter implements Presenter<ImportBookView>{
     private ImportBookView mImportBookView;
 
     @Override
-    public void attachView(View view) {
-        this.mImportBookView = (ImportBookView)view;
+    public void attachView(ImportBookView view) {
+
     }
 
     @Override

@@ -14,4 +14,7 @@
     <string name="other">其他</string>
     <string name="apply_to_application_key">apply_to_application_key</string>
     <string name="apply_to_application">给应用去打分</string>
+
+    <string name="load_fail">下载失败</string>
+    <string name="no_books">没有书籍</string>
 </resources>
