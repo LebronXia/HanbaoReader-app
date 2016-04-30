@@ -47,7 +47,6 @@ public class PlaceBookFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frament_placebook, container, false);
         bookPaths = getArguments().getStringArrayList(Constant.BUNDLE_PLACE);
-        LogUtils.d("书的路径" + bookPaths.get(0));
         mBookDao = new BookDao(getActivity());
         for (String bookPath : bookPaths){
             mDatas = new ArrayList<>();

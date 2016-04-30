@@ -235,8 +235,10 @@ public class ImportBookActivity extends BaseActivity implements ImportBookView,D
                 } else {
                     if (files[i].getName().endsWith(".txt")){
                         mSearchitems.add(files[i].getAbsolutePath());
-
+                    } else if(files[i].getName().endsWith(".pdf")){
+                        mSearchitems.add(files[i].getAbsolutePath());
                     }
+
                 }
             }
         }

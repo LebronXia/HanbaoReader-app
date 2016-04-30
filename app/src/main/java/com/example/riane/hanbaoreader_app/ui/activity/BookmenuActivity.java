@@ -14,6 +14,8 @@ import com.example.riane.hanbaoreader_app.app.BaseActivity;
 import com.example.riane.hanbaoreader_app.ui.adapter.BookMarkAdapter;
 import com.example.riane.hanbaoreader_app.ui.adapter.BookTabAdapter;
 import com.example.riane.hanbaoreader_app.ui.fragment.BookMarkFragment;
+import com.example.riane.hanbaoreader_app.ui.fragment.BookMenuFragment;
+import com.example.riane.hanbaoreader_app.util.LogUtils;
 import com.example.riane.hanbaoreader_app.widget.BookMarkPopWinsow;
 
 import java.io.Serializable;
@@ -27,6 +29,7 @@ import butterknife.ButterKnife;
  * Created by Riane on 2016/4/10.
  */
 public class BookmenuActivity extends BaseActivity{
+    public final static String BUNDLE_BOOK_PATH = "bundle_bookpath";
 
     @Bind(R.id.tab_fragment_title)
     TabLayout tabLayout;
@@ -34,28 +37,32 @@ public class BookmenuActivity extends BaseActivity{
     ViewPager viewPager;
 
     private BookMarkFragment bookMarkFragment;
-    private BookMarkFragment bookMenuFragment;
+    private BookMenuFragment bookMenuFragment;
 
     private List<Fragment> list_fragment;
     private List<String> list_title;
 
+    private String bookPath;
     private BookTabAdapter bookTabAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bookmenu);
         ButterKnife.bind(this);
+        bookPath = getIntent().getStringExtra(BUNDLE_BOOK_PATH);
+        LogUtils.d("书的路径" + bookPath);
         initView();
     }
 
     private void initView() {
         //初始化各fragment
         bookMarkFragment = new BookMarkFragment();
-        bookMenuFragment = new BookMarkFragment();
+        bookMenuFragment = BookMenuFragment.newInstance(bookPath);
 
         list_fragment = new ArrayList<>();
-        list_fragment.add(bookMarkFragment);
         list_fragment.add(bookMenuFragment);
+        list_fragment.add(bookMarkFragment);
+
 
         list_title = new ArrayList<>();
         list_title.add("目录");
@@ -74,8 +81,9 @@ public class BookmenuActivity extends BaseActivity{
     }
 
 
-    public static Intent getCallingIntent(Context context){
+    public static Intent getCallingIntent(Context context, String path){
         Intent intent = new Intent(context, BookmenuActivity.class);
+        intent.putExtra(BUNDLE_BOOK_PATH,path);
         return intent;
     }
 }

@@ -24,7 +24,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper{
     //private Dao bookdao = null;
     private Map<String, Dao> daos = new HashMap<String, Dao>();
     private DatabaseHelper(Context context) {
-        super(context, TABLE_NAME, null, 7);
+        super(context, TABLE_NAME, null, 8);
     }
 
     //创建BOOK表

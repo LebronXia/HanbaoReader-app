@@ -173,7 +173,7 @@ public class ReadBookActivity extends BaseActivity implements View.OnClickListen
                             }
                         } else {
                             // 停止动画
-                            mBookPageView.abortAnimation();
+                            //mBookPageView.abortAnimation();
                             // 计算拖拽点对应的拖拽角
                             mBookPageView.calcCornerXY(event.getX(), event.getY());
 
@@ -219,7 +219,7 @@ public class ReadBookActivity extends BaseActivity implements View.OnClickListen
                     ret = mBookPageView.doTouchEvent(event);
                     return ret;
                 }
-                return false;
+                return true;
             }
         });
         initPopupWindow();
@@ -341,7 +341,7 @@ public class ReadBookActivity extends BaseActivity implements View.OnClickListen
 
             //目录按钮
             case R.id.iv_bookmenu:
-                startActivity(BookmenuActivity.getCallingIntent(ReadBookActivity.this));
+                startActivity(BookmenuActivity.getCallingIntent(ReadBookActivity.this,bookPath));
                 break;
             //亮度按钮
             case R.id.iv_booklight:

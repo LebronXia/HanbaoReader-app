@@ -16,9 +16,7 @@ import com.example.riane.hanbaoreader_app.cache.BookTagDao;
 import com.example.riane.hanbaoreader_app.modle.BookTag;
 import com.example.riane.hanbaoreader_app.ui.fragment.PlaceBookFragment;
 import com.example.riane.hanbaoreader_app.util.LogUtils;
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.common.api.GoogleApiClient;
+
 
 import java.util.ArrayList;
 import java.util.Arrays;
