@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
@@ -18,6 +19,7 @@ import com.example.riane.hanbaoreader_app.R;
 import com.example.riane.hanbaoreader_app.app.BaseActivity;
 import com.example.riane.hanbaoreader_app.ui.fragment.BookCaseFragment;
 import com.example.riane.hanbaoreader_app.ui.fragment.BookStoreFragment;
+import com.example.riane.hanbaoreader_app.util.SPUtils;
 import com.example.riane.hanbaoreader_app.widget.MyTitleView;
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
 
@@ -43,6 +45,10 @@ public class MainActivity extends BaseActivity {
     private Fragment mContent;
     private BookCaseFragment mBookCaseFragment= new BookCaseFragment();
     private BookStoreFragment mBookStoreFragment = new BookStoreFragment();
+    private boolean isTwoReturn = false;
+    private boolean isShake = false;
+    private boolean isOpenDraw = false;
+    private long lastPressTime = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,7 +64,7 @@ public class MainActivity extends BaseActivity {
     }
 
     private void initData() {
-
+        isTwoReturn = (boolean) SPUtils.get(MainActivity.this, "IS_TWORETURN", false);
     }
 
     public void initView(){
@@ -83,6 +89,7 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 mDrawerLayout.openDrawer(GravityCompat.START);
+                isOpenDraw= true;
             }
         });
 
@@ -107,6 +114,7 @@ public class MainActivity extends BaseActivity {
 
 
                 mDrawerLayout.closeDrawers();
+                isOpenDraw = false;
                 return false;
             }
         });
@@ -132,6 +140,26 @@ public class MainActivity extends BaseActivity {
             } else {
                 transaction.hide(from).show(to).commit();
             }
+        }
+    }
+
+    private boolean canExit(){
+        if (!isTwoReturn){
+            if(System.currentTimeMillis() - lastPressTime > 2000){
+                lastPressTime = System.currentTimeMillis();
+                Snackbar.make(getCurrentFocus(), "再按一次退出", Snackbar.LENGTH_SHORT).show();
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (isOpenDraw){
+            mDrawerLayout.closeDrawers();
+        } else if (canExit()){
+            super.onBackPressed();
         }
     }
 

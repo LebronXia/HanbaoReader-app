@@ -75,6 +75,7 @@ public class BookPageFactory {
 		mVisibleWidth = mWidth - marginWidth * 2;
 		mVisibleHeight = mHeight - marginHeight * 2;//屏幕的高度-上下预留的距离
 		mLineCount = (int) (mVisibleHeight / m_fontSize); // 可显示的行数:真正显示文本的行数
+		LogUtils.d("BookPageFactory +" + mLineCount);
 	}
 	
 
@@ -185,7 +186,7 @@ public class BookPageFactory {
 		mPaint.setColor(m_textColor);
 		String strParagraph = "";
 		Vector<String> lines = new Vector<String>();
-		while (lines.size() < 10 && m_mbBufEnd < m_mbBufLen) {
+		while (lines.size() < mLineCount && m_mbBufEnd < m_mbBufLen) {
 			byte[] paraBuf = readParagraphForward(m_mbBufEnd); // 读取一个段落
 			m_mbBufEnd += paraBuf.length;   //每次读取后，记录结束点位置，该位置是段落结束位置
 			try {
@@ -305,11 +306,12 @@ public class BookPageFactory {
 	public void onDraw(Canvas c) {
 		mPaint.setTextSize(m_fontSize);
 		mPaint.setColor(m_textColor);
-		if (m_lines.size() == 0) {//还没有取好数据
-			m_lines = pageDown();//存储显示是文字
+		if (m_lines.size() == 0) {
+			m_lines = pageDown();//存储显示是文//还没有取好数据字
 			Log.d(TAG, "m_lines.size() == 0");
 		}
 		if (m_lines.size() > 0) {
+
 			if (m_book_bg == null)//判断背景颜色是否为空
 				c.drawColor(m_backColor);
 			else
@@ -319,7 +321,7 @@ public class BookPageFactory {
 			for (String strLine : m_lines) {
 				y += m_fontSize;//一次绘制一行
 				c.drawText(strLine, marginWidth, y, mPaint);
-				Log.d("MyBook", strLine);
+				//Log.d("MyBook", strLine);
 			}
 		}
 		//计算分页的内容，也是绘制在屏幕

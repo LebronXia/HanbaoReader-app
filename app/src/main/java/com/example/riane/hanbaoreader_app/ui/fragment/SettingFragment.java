@@ -17,9 +17,10 @@ public class SettingFragment extends PreferenceFragment implements Preference.On
 
     public static final String PREFERENCE_FIFE_NAME = "note.settings";
     private CheckBoxPreference cardLayoutPreference;
-    private CheckBoxPreference switchPreference;
+    private CheckBoxPreference switchReturnPreference;
     private SettingsActivity settingsActivity;
     private boolean isCard = false;
+    private boolean isTwoReturn = false;
 
     public static SettingFragment newInstance(){
         SettingFragment fragment = new SettingFragment();
@@ -41,6 +42,8 @@ public class SettingFragment extends PreferenceFragment implements Preference.On
 
         cardLayoutPreference = (CheckBoxPreference) findPreference(getString(R.string.card_note_item_layout_key));
         cardLayoutPreference.setOnPreferenceChangeListener(this);
+        switchReturnPreference = (CheckBoxPreference) findPreference("switch_return_key");
+        switchReturnPreference.setOnPreferenceChangeListener(this);
         if ((boolean)SPUtils.get(getActivity(), "IS_CARD", false) == true){
             cardLayoutPreference.setChecked(true);
         }
@@ -52,6 +55,11 @@ public class SettingFragment extends PreferenceFragment implements Preference.On
             isCard = (boolean)SPUtils.get(getActivity(), "IS_CARD", false);
             isCard = !isCard;
             SPUtils.put(getActivity(),"IS_CARD",isCard);
+            return true;
+        } else if(preference == switchReturnPreference){
+            isTwoReturn = (boolean) SPUtils.get(getActivity(), "IS_TWORETURN", false);
+            isTwoReturn = !isTwoReturn;
+            SPUtils.put(getActivity(),"IS_TWORETURN",isTwoReturn);
             return true;
         }
         return false;

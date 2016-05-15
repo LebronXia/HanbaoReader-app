@@ -120,7 +120,6 @@ public class BookMenuFragment extends BaseFragment {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                LogUtils.d("你好");
                 analysisChapterList();
 
                 Message message = new Message();

@@ -136,7 +136,7 @@ public class BookCaseFragment extends BaseFragment {
                 dialog.dismiss();
                 if (items[which].equals("删除书籍")) {
                     bookDao.delete(mDatas.get(position));
-                    initDatas();
+                    mDatas.remove(position);
                     mCaseAdapter.notifyDataSetChanged();
                 } else if (items[which].equals("归档图书")){
                     showClassifyDialog(position);

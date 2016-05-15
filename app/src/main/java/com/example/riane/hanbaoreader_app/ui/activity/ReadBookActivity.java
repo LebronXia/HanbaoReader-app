@@ -2,6 +2,7 @@ package com.example.riane.hanbaoreader_app.ui.activity;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -13,6 +14,8 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.AlteredCharSequence;
 import android.util.Log;
 import android.view.Display;
@@ -29,6 +32,7 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -62,6 +66,7 @@ import butterknife.OnClick;
 public class ReadBookActivity extends BaseActivity implements View.OnClickListener,SeekBar.OnSeekBarChangeListener {
 
     private static final String EXTRA_READ_BOOK = "com.riane.extra_read_book";
+    private final static int DIALOG_BOOKLOAD = 2;
     private static final String TAG = "Read2";
     private ToPopwindow morePopWindow;
     private PopupWindow pop_bottommenu, pop_toolmenu, pop_text, pop_light;
@@ -74,6 +79,7 @@ public class ReadBookActivity extends BaseActivity implements View.OnClickListen
     private TextView dialog_tv_progress;
     private SeekBar dialog_seekbar;
     private Button btn_ok,btn_cancel;
+    private ProgressDialog progressDialog;
 
     private Dialog dialog;
     @Bind(R.id.btn_bigtext)
@@ -109,7 +115,19 @@ public class ReadBookActivity extends BaseActivity implements View.OnClickListen
     private SharedPreferences sp;
     private SharedPreferences.Editor editor;
     private WindowManager.LayoutParams lp;
+    private Handler mHandler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
 
+            switch(msg.what){
+                case DIALOG_BOOKLOAD:
+                    progressDialog.dismiss();
+                    break;
+
+            }
+            super.handleMessage(msg);
+        }
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -121,8 +139,9 @@ public class ReadBookActivity extends BaseActivity implements View.OnClickListen
         //getWindow().setFlags(WindowManager.LayoutParams.FILL_PARENT, WindowManager.LayoutParams.FILL_PARENT);  //设置全屏
         setContentView(R.layout.activity_readbook);
         bookMarkDao = new BookMarkDao(ReadBookActivity.this);
-        initData();
         defaultSize = (screenWidth * 20) / 320;
+        initData();
+        LogUtils.d("defaultSize +" + defaultSize + "screenwidth:" +screenWidth);
         readHeight = screenHeight ;
         lp = getWindow().getAttributes();
         lp.screenBrightness = light / 10.0f < 0.01f ? 0.01f : light / 10.0f;
@@ -142,16 +161,27 @@ public class ReadBookActivity extends BaseActivity implements View.OnClickListen
         mBookPageFactory = new BookPageFactory(this, screenWidth, readHeight);
         book = (Book) getIntent().getSerializableExtra(EXTRA_READ_BOOK);
         bookPath = book.getFilePath();
-        try {
 
-            fileLenth = mBookPageFactory.openBook(book);
-            mBookPageFactory.setM_fontSize(size);
-            //将文字绘制于手机屏幕
-            mBookPageFactory.onDraw(mCurPageCanvas);
-        } catch (IOException e) {
-            Log.e(TAG, "打开电子书失败", e);
-            Toast.makeText(this, "打开电子书失败", Toast.LENGTH_SHORT).show();
-        }
+        progressDialog = ProgressDialog.show(ReadBookActivity.this, "温馨提示", "正在加载图书", true);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    fileLenth = mBookPageFactory.openBook(book);
+                    mBookPageFactory.setM_fontSize(size);
+                    //将文字绘制于手机屏幕
+                    mBookPageFactory.onDraw(mCurPageCanvas);
+                } catch (IOException e) {
+                    Log.e(TAG, "打开电子书失败", e);
+                    Toast.makeText(ReadBookActivity.this, "打开电子书失败", Toast.LENGTH_SHORT).show();
+                }
+
+                Message message = new Message();
+                message.what = DIALOG_BOOKLOAD;
+                mHandler.sendMessage(message);
+            }
+        }).start();
+
 
         mBookPageView.setBitmaps(mCurPageBitmap, mCurPageBitmap);
 
