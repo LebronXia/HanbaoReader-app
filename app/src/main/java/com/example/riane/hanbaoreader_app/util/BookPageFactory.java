@@ -58,7 +58,7 @@ public class BookPageFactory {
 	private float mVisibleWidth; // 绘制内容的宽
 	private boolean m_isfirstPage, m_islastPage;
 
-	// private int m_nLineSpaceing = 5;
+	//private int m_nLineSpaceing = 5;
 
 	private Paint mPaint;
 
@@ -185,7 +185,7 @@ public class BookPageFactory {
 		mPaint.setColor(m_textColor);
 		String strParagraph = "";
 		Vector<String> lines = new Vector<String>();
-		while (lines.size() < mLineCount && m_mbBufEnd < m_mbBufLen) {
+		while (lines.size() < 10 && m_mbBufEnd < m_mbBufLen) {
 			byte[] paraBuf = readParagraphForward(m_mbBufEnd); // 读取一个段落
 			m_mbBufEnd += paraBuf.length;   //每次读取后，记录结束点位置，该位置是段落结束位置
 			try {
@@ -319,7 +319,7 @@ public class BookPageFactory {
 			for (String strLine : m_lines) {
 				y += m_fontSize;//一次绘制一行
 				c.drawText(strLine, marginWidth, y, mPaint);
-				//Log.d("MyBook", strLine);
+				Log.d("MyBook", strLine);
 			}
 		}
 		//计算分页的内容，也是绘制在屏幕
@@ -334,10 +334,10 @@ public class BookPageFactory {
 		book.setProgress(strPercent);
 		book.setLastReadTime(new Date());
 		mBookDao.update(book);
-		Log.d(TAG, "onDraw m_mbBufBegin:" + m_mbBufBegin);
-		Log.d(TAG, "onDraw m_mbBufEnd:" + m_mbBufEnd);
-		Log.d(TAG, "onDraw m_mbBufLen:" + m_mbBufLen);
-		Log.d(TAG, "onDraw strPercent:" + strPercent);
+//		Log.d(TAG, "onDraw m_mbBufBegin:" + m_mbBufBegin);
+//		Log.d(TAG, "onDraw m_mbBufEnd:" + m_mbBufEnd);
+//		Log.d(TAG, "onDraw m_mbBufLen:" + m_mbBufLen);
+//		Log.d(TAG, "onDraw strPercent:" + strPercent);
 		// Log.d(TAG, "onDraw book:" + book);
 	}
 

@@ -15,6 +15,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Scroller;
 
+import com.example.riane.hanbaoreader_app.util.LogUtils;
+
 /**
  * 上下页的图片,翻书的效果
  */
@@ -122,6 +124,7 @@ public class BookPageView extends View {
 			mTouch.y = event.getY();
 			// 重绘
 			this.postInvalidate();
+			//LogUtils.d("屏幕滑动--");
 		}
 		if (event.getAction() == MotionEvent.ACTION_DOWN) {// 屏幕按下
 			mTouch.x = event.getX();
@@ -131,6 +134,7 @@ public class BookPageView extends View {
 			} else {
 				mIsMiddle = false;
 			}
+			//LogUtils.d("按到中间拉");
 			// calcCornerXY(mTouch.x, mTouch.y);
 			// this.postInvalidate();
 		}

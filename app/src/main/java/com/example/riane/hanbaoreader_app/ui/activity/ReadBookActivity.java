@@ -143,6 +143,7 @@ public class ReadBookActivity extends BaseActivity implements View.OnClickListen
         book = (Book) getIntent().getSerializableExtra(EXTRA_READ_BOOK);
         bookPath = book.getFilePath();
         try {
+
             fileLenth = mBookPageFactory.openBook(book);
             mBookPageFactory.setM_fontSize(size);
             //将文字绘制于手机屏幕
@@ -173,7 +174,7 @@ public class ReadBookActivity extends BaseActivity implements View.OnClickListen
                             }
                         } else {
                             // 停止动画
-                            //mBookPageView.abortAnimation();
+                            mBookPageView.abortAnimation();
                             // 计算拖拽点对应的拖拽角
                             mBookPageView.calcCornerXY(event.getX(), event.getY());
 
@@ -187,13 +188,16 @@ public class ReadBookActivity extends BaseActivity implements View.OnClickListen
                                     word = mBookPageFactory.getFirstLineText();//获取当前阅读位置的首行
                                     LogUtils.d("当前阅读位置的首行" + word);
                                 } catch (IOException e1) {
-                                    // TODO Auto-generated catch block
                                     e1.printStackTrace();
                                 }
-                                if (mBookPageFactory.isfirstPage())
+                                if (mBookPageFactory.isfirstPage()){
+                                    ToastUtils.showShort(ReadBookActivity.this,"当前是第一页");
                                     return false;
+                                }
+
                                 mBookPageFactory.onDraw(mNextPageCanvas);
                             } else {
+                                //右翻
                                 try {
                                     //false，显示下一页
                                     mBookPageFactory.nextPage();
@@ -205,7 +209,7 @@ public class ReadBookActivity extends BaseActivity implements View.OnClickListen
                                 }
                                 if (mBookPageFactory.islastPage()) {
                                     //Toast.makeText(ReadBookActivity.this, "已经是最后一页了", Toast.LENGTH_SHORT).show();
-                                    showTextToast("已经是最后一页了");
+                                    ToastUtils.showShort(ReadBookActivity.this,"已经是最后一页了");
                                     return false;
                                 }
                                 //绘制图形在nextBitmap
@@ -219,7 +223,7 @@ public class ReadBookActivity extends BaseActivity implements View.OnClickListen
                     ret = mBookPageView.doTouchEvent(event);
                     return ret;
                 }
-                return true;
+                return false;
             }
         });
         initPopupWindow();
@@ -428,7 +432,6 @@ public class ReadBookActivity extends BaseActivity implements View.OnClickListen
             case R.id.dialog_seekbar:
                  dialog_progess = dialog_seekbar.getProgress();
                 dialog_tv_progress.setText(dialog_progess + "%");
-
                 break;
         }
     }
@@ -443,7 +446,7 @@ public class ReadBookActivity extends BaseActivity implements View.OnClickListen
 
     }
 
-    //增大字体
+    //减小字体
     @OnClick(R.id.btn_smalltext)
     public void onsmalltextbtn() {
         size -= 5;
@@ -460,7 +463,7 @@ public class ReadBookActivity extends BaseActivity implements View.OnClickListen
         postInvalidateUI();
     }
 
-    //减小字体
+    //增大字体
     @OnClick(R.id.btn_bigtext)
     public void onBigTextBtn() {
         size += 5;

@@ -49,6 +49,10 @@
 
         <activity android:name=".ui.activity.PlaceBookActivity"/>
 
+        <activity android:name=".ui.activity.BookViewActivity">
+
+        </activity>
+
         <activity android:name=".ui.activity.TestActivity">
 
         </activity>

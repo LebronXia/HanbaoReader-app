@@ -17,4 +17,6 @@
     <color name="main_bg_2">#668564</color>
     <color name="main_bg_3">#997c56</color>
 
+    <color name="search_item_bg">#cccccc</color>
+
 </resources>

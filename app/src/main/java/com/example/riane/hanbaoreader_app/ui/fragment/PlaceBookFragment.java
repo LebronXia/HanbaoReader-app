@@ -64,9 +64,17 @@ public class PlaceBookFragment extends BaseFragment {
         mRecyclerView.setLayoutManager(layout);
         //如果确定每个item的高度是固定的，设置这个选项可以提高性能
         mRecyclerView.setHasFixedSize(true);
+        if (mDatas == null || mDatas.size() < 1){
+            mEmptyView.setVisibility(View.VISIBLE);
+            mRecyclerView.setVisibility(View.GONE);
+        } else {
+            mEmptyView.setVisibility(View.GONE);
+            mRecyclerView.setVisibility(View.VISIBLE);
+
+        }
+
         mPlaceBookAdapter = new PlaceBookAdapter(getActivity(),mDatas);
         mRecyclerView.setAdapter(mPlaceBookAdapter);
-
         mPlaceBookAdapter.setOnItemClickListener(new PlaceBookAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {

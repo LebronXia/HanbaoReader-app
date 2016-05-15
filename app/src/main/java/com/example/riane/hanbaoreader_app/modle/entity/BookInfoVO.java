@@ -1,11 +1,11 @@
 package com.example.riane.hanbaoreader_app.modle.entity;
 
-import java.io.Serializable;
+import java.util.List;
 
 /**
- * Created by Riane on 2016/4/15.
+ * Created by Riane on 2016/5/8.
  */
-public class BookVO implements Serializable {
+public class BookInfoVO{
     private int id;
     private String name;
     private String author;
@@ -15,6 +15,7 @@ public class BookVO implements Serializable {
     private String bookResource;
     private String bookDescription;
     private String bookList;
+    private List<String> tags;
 
     public int getId() {
         return id;
@@ -38,6 +39,14 @@ public class BookVO implements Serializable {
 
     public void setAuthor(String author) {
         this.author = author;
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
     }
 
     public String getPublish() {
@@ -64,14 +73,6 @@ public class BookVO implements Serializable {
         this.bookResource = bookResource;
     }
 
-    public String getIsbn() {
-        return isbn;
-    }
-
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
-    }
-
     public String getBookDescription() {
         return bookDescription;
     }
@@ -86,5 +87,13 @@ public class BookVO implements Serializable {
 
     public void setBookList(String bookList) {
         this.bookList = bookList;
+    }
+
+    public List<String> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<String> tags) {
+        this.tags = tags;
     }
 }

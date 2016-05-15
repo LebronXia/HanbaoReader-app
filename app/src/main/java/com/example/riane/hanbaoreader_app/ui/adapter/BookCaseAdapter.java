@@ -3,6 +3,7 @@ package com.example.riane.hanbaoreader_app.ui.adapter;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.ViewHolder;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import com.example.riane.hanbaoreader_app.R;
 import com.example.riane.hanbaoreader_app.modle.Book;
 import com.example.riane.hanbaoreader_app.ui.fragment.BookCaseFragment;
+import com.example.riane.hanbaoreader_app.util.LogUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -51,13 +53,19 @@ public class BookCaseAdapter extends RecyclerView.Adapter<BookCaseAdapter.MyView
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
-        if (BookCaseFragment.isCardVIew){
+        String[] string = mDatas.get(position).getName().split("\\.");
+        //LogUtils.d(string[0]);
+        if (string[1].equals("txt")){
             holder.mImg.setImageResource(R.mipmap.cover_txt);
-            holder.mTxt.setText(mDatas.get(position).getName());
+        } else {
+            holder.mImg.setImageResource(R.mipmap.cover_pdf);
+        }
+        holder.mTxt.setText(string[0]);
+        if (BookCaseFragment.isCardVIew){
             holder.mProgress.setText("已读" + mDatas.get(position).getProgress());
         } else {
-            holder.mImg.setImageResource(R.mipmap.cover_txt);
-            holder.mTxt.setText(mDatas.get(position).getName());
+//            holder.mImg.setImageResource(R.mipmap.cover_txt);
+//            holder.mTxt.setText(mDatas.get(position).getName());
             holder.mProgress.setText("读书进度：" + mDatas.get(position).getProgress());
             SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm ss");
             String time = sf.format(mDatas.get(position).getLastReadTime());

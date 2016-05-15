@@ -14,6 +14,8 @@ import com.example.riane.hanbaoreader_app.util.FileTypeUtils;
 import java.io.File;
 import java.util.List;
 
+import cn.refactor.library.SmoothCheckBox;
+
 
 /**
  * Created by Xiamu on 2016/3/28.
@@ -48,6 +50,8 @@ public class DirectoryAdapter extends RecyclerView.Adapter<DirectoryAdapter.Dire
         holder.mFileImage.setImageResource(fileType.getIcon());
         holder.mFileSubtitle.setText(fileType.getDescription());
         holder.mFileTitle.setText(currentFile.getName());
+
+
     }
 
     @Override
@@ -63,6 +67,8 @@ public class DirectoryAdapter extends RecyclerView.Adapter<DirectoryAdapter.Dire
         private ImageView mFileImage;
         private TextView mFileTitle;
         private TextView mFileSubtitle;
+        private SmoothCheckBox mCheckBox;
+        private TextView mImportText;
         public DirectoryViewHolder(android.view.View itemView, final OnItemClickListener clickListener) {
             super(itemView);
 

@@ -1,6 +1,7 @@
 package com.example.riane.hanbaoreader_app.network;
 
 import com.example.riane.hanbaoreader_app.config.Constant;
+import com.example.riane.hanbaoreader_app.modle.entity.BookInfoVO;
 import com.example.riane.hanbaoreader_app.modle.entity.BookVO;
 import com.example.riane.hanbaoreader_app.modle.entity.HttpResult;
 import com.example.riane.hanbaoreader_app.modle.entity.UserVO;
@@ -25,5 +26,8 @@ public interface BookApi {
 
     @GET(Constant.URL_BOOK)
     Observable<HttpResult<List<BookVO>>> getUser(@Path("tag") String tag);
+
+    @GET(Constant.URL_BOOKINFO)
+    Observable<HttpResult<BookInfoVO>> getBookInfo(@Path("isbn") String isbn);
 
 }

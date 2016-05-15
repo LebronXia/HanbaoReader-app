@@ -4,11 +4,14 @@ import android.widget.Toast;
 
 import com.example.riane.hanbaoreader_app.config.Constant;
 import com.example.riane.hanbaoreader_app.modle.Book;
+import com.example.riane.hanbaoreader_app.modle.entity.BookInfoVO;
 import com.example.riane.hanbaoreader_app.modle.entity.BookVO;
 import com.example.riane.hanbaoreader_app.modle.entity.HttpResult;
 import com.example.riane.hanbaoreader_app.modle.entity.UserVO;
 import com.example.riane.hanbaoreader_app.network.BookApi;
+import com.example.riane.hanbaoreader_app.presenter.IBookInfoPresent;
 import com.example.riane.hanbaoreader_app.presenter.IBookStorePresenter;
+import com.example.riane.hanbaoreader_app.presenter.Presenter;
 import com.example.riane.hanbaoreader_app.presenter.impl.BookStorePresent;
 import com.example.riane.hanbaoreader_app.util.LogUtils;
 
@@ -36,15 +39,20 @@ import rx.schedulers.Schedulers;
  */
 public class BookStoreModel {
     IBookStorePresenter mIBookStorePresent;
-    private static final int DEAULT_TIMEOUT = 5;
+    IBookInfoPresent mIBookInfoPresent;
+    private static final int DEAULT_TIMEOUT = 10;
     private Retrofit retrofit;
 
-    public BookStoreModel(IBookStorePresenter iBookStorePresent) {
-        this.mIBookStorePresent = iBookStorePresent;
+    public BookStoreModel(Object object) {
+        if (object instanceof IBookStorePresenter){
+            this.mIBookStorePresent = (IBookStorePresenter) object;
+        } else if (object instanceof IBookInfoPresent){
+            this.mIBookInfoPresent = (IBookInfoPresent) object;
+        }
+
     }
 
-    public void loadData(String tag){
-
+    public void init(){
         //手建一个OKHttpClient并设置超时时间
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
         builder.connectTimeout(DEAULT_TIMEOUT, TimeUnit.SECONDS);
@@ -55,7 +63,10 @@ public class BookStoreModel {
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
+    }
 
+    public void loadData(String tag){
+        init();
         BookApi bookApi = retrofit.create(BookApi.class);
 
         bookApi.getUser(tag)
@@ -80,6 +91,42 @@ public class BookStoreModel {
                         if (bookVOs != null || bookVOs.size() > 1){
                             LogUtils.d("下载中"+ bookVOs.get(0).getName());
                             mIBookStorePresent.loadDataSuccess(bookVOs);
+                        }
+                    }
+                });
+    }
+
+    public void loadBookInfo(String isbn){
+
+        init();
+        BookApi bookApi = retrofit.create(BookApi.class);
+        bookApi.getBookInfo(isbn)
+                .map(new HttpResultFunc<BookInfoVO>())
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<BookInfoVO>() {
+                    @Override
+                    public void onCompleted() {
+                        LogUtils.d("到达");
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        LogUtils.d("下载出错error:" + e.getMessage());
+                        //mIBookStorePresent.loadDataFailure();
+                        mIBookInfoPresent.loadDataFailure();
+                    }
+
+                    @Override
+                    public void onNext(BookInfoVO bookInfoVO) {
+//                        if (bookVOs != null || bookVOs.size() > 1) {
+//                            LogUtils.d("下载中" + bookVOs.get(0).getName());
+//                            mIBookStorePresent.loadDataSuccess(bookVOs);
+//                        }
+                        if (bookInfoVO != null){
+                            LogUtils.d(bookInfoVO.getAuthor());
+                            mIBookInfoPresent.loadDataSuccess(bookInfoVO);
                         }
                     }
                 });

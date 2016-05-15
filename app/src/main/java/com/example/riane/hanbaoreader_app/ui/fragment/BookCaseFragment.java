@@ -102,10 +102,6 @@ public class BookCaseFragment extends BaseFragment {
 
         mSmartTabLayout = (SmartTabLayout) getActivity().findViewById(R.id.tab_layout);
         mSmartTabLayout.setVisibility(View.GONE);
-        //创建默认的线性LayoutManager
-        //GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(),3);
-        //StaggeredGridLayoutManager layout = new StaggeredGridLayoutManager(3,StaggeredGridLayoutManager.VERTICAL);
-
         //如果确定每个item的高度是固定的，设置这个选项可以提高性能
         mRecyclerView.setHasFixedSize(true);
         mCaseAdapter = new BookCaseAdapter(getActivity(),mDatas);
@@ -127,8 +123,6 @@ public class BookCaseFragment extends BaseFragment {
 
         // 设置item动画
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-
-
     }
 
     private void showDialog(final int position) {
@@ -142,6 +136,7 @@ public class BookCaseFragment extends BaseFragment {
                 dialog.dismiss();
                 if (items[which].equals("删除书籍")) {
                     bookDao.delete(mDatas.get(position));
+                    initDatas();
                     mCaseAdapter.notifyDataSetChanged();
                 } else if (items[which].equals("归档图书")){
                     showClassifyDialog(position);

@@ -29,6 +29,7 @@ import com.example.riane.hanbaoreader_app.modle.Book;
 import com.example.riane.hanbaoreader_app.modle.entity.BookVO;
 import com.example.riane.hanbaoreader_app.modle.entity.UserVO;
 import com.example.riane.hanbaoreader_app.presenter.impl.BookStorePresent;
+import com.example.riane.hanbaoreader_app.ui.activity.BookViewActivity;
 import com.example.riane.hanbaoreader_app.ui.adapter.BookCaseAdapter;
 import com.example.riane.hanbaoreader_app.ui.adapter.BookStroeListAdapter;
 import com.example.riane.hanbaoreader_app.util.FileDownloadThread;
@@ -153,7 +154,7 @@ public class BookListFragment extends Fragment implements BookStoreView {
 
         int threadNum = 5;
         String filepath = path + fileName;
-        LogUtils.d(TAG + filepath);
+        //LogUtils.d(TAG + filepath);
 
         downloadTask task = new downloadTask(downloadUrl,threadNum,filepath);
         task.start();
@@ -237,8 +238,8 @@ public class BookListFragment extends Fragment implements BookStoreView {
         }
     }
     @Override
-    public void showData(List<BookVO> bookVOs) {
-        LogUtils.d("user的数据" + bookVOs.get(0).getName());
+    public void showData(final List<BookVO> bookVOs) {
+        //LogUtils.d("user的数据" + bookVOs.get(0).getName());
         if (bookVOs != null){
             bookList = bookVOs;
         }
@@ -249,7 +250,8 @@ public class BookListFragment extends Fragment implements BookStoreView {
         mBookStroeListAdapter.setOnItemClickListener(new BookStroeListAdapter.OnItemClickListener(){
             @Override
             public void onItemClick(View view, int position) {
-
+                //LogUtils.d("单击如数");
+                startActivity(BookViewActivity.getCallingIntent(getActivity(), bookVOs.get(position)));
             }
 
             @Override

@@ -39,9 +39,7 @@ public class FileUtils {
                 } else {
                     resultFiles.add(f);
                 }
-
             }
-
             Collections.sort(resultFiles, new FileComparator());
         }
 
