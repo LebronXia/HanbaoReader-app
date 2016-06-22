@@ -56,7 +56,10 @@ public class BookMarkFragment extends Fragment{
     private void initData() {
         bookMarkDao = new BookMarkDao(getActivity());
         bookMarklist = bookMarkDao.getAll();
-        //LogUtils.d("bookMarklist" + bookMarklist.get(0).getTextword());
+        if(bookMarklist != null && bookMarklist.size() > 0 ){
+            LogUtils.d("bookMarklist" + bookMarklist.get(0).getTextword());
+        }
+
         if (bookMarklist == null || bookMarklist.size() < 1){
             bookmarkrecycleview.setVisibility(View.GONE);
             rl_emptyView.setVisibility(View.VISIBLE);

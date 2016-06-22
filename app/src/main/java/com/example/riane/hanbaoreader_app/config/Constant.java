@@ -8,7 +8,7 @@ public class Constant {
     public static String BUNDLE_MENU_PATH = "bundle_menu_path";
     public static String BUNDLE_BOOK_VIEW = "bundle_book_view";
 
-    public static final String BASEURL = "http://10.66.83.138:8080/reader/";
+    public static final String BASEURL = "http://172.20.10.2:8080/reader/";
     public static final String SCHOOL_BASEURL = "http://10.66.121.124:8080/reader/";
     public static final String URL_USER = "books/hello1/{name}";
     public static final String URL_BOOK = "books/search/{tag}";

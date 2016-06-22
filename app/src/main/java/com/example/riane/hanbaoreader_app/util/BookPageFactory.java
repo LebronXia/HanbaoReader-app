@@ -84,6 +84,11 @@ public class BookPageFactory {
 		book_file = new File(book.getFilePath());
 		long lLen = book_file.length();
 		m_mbBufLen = (int) lLen;
+		/**
+		 * 内存映射文件能让你创建和修改那些因为太大而无法放入内存的文件。有了内存映射文件，
+		 * 你就可以认为文件已经全部读进了内存，
+		 * 然后把它当成一个非常大的数组来访问。这种解决办法能大大简化修改文件的代码。
+		 */
 		m_mbBuf = new RandomAccessFile(book_file, "r").getChannel().map(FileChannel.MapMode.READ_ONLY, 0, lLen);
 		// 把数据库的初始位置取出来赋值
 		this.m_mbBufEnd = book.getBegin();//(book.getPageNo-1)*book.getPageSize
@@ -336,11 +341,6 @@ public class BookPageFactory {
 		book.setProgress(strPercent);
 		book.setLastReadTime(new Date());
 		mBookDao.update(book);
-//		Log.d(TAG, "onDraw m_mbBufBegin:" + m_mbBufBegin);
-//		Log.d(TAG, "onDraw m_mbBufEnd:" + m_mbBufEnd);
-//		Log.d(TAG, "onDraw m_mbBufLen:" + m_mbBufLen);
-//		Log.d(TAG, "onDraw strPercent:" + strPercent);
-		// Log.d(TAG, "onDraw book:" + book);
 	}
 
 	public void setBgBitmap(Bitmap BG) {

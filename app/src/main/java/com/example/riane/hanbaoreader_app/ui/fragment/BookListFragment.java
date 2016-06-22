@@ -234,7 +234,6 @@ public class BookListFragment extends Fragment implements BookStoreView {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-
         }
     }
     @Override

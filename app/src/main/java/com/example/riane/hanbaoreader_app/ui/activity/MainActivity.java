@@ -41,6 +41,10 @@ public class MainActivity extends BaseActivity {
     NavigationView mNavigationView;
     @Bind(R.id.tab_layout)
     SmartTabLayout mSmartTabLayout;
+    @Bind(R.id.firstTabview)
+    View firstTabview;
+    @Bind(R.id.secondTabview)
+    View secondTabview;
 
     private Fragment mContent;
     private BookCaseFragment mBookCaseFragment= new BookCaseFragment();
@@ -57,6 +61,8 @@ public class MainActivity extends BaseActivity {
         //setSupportActionBar(toolbar);
 
         ButterKnife.bind(this);
+        secondTabview.setVisibility(View.GONE);
+        firstTabview.setVisibility(View.VISIBLE);
         switchcontent(mBookStoreFragment, mBookCaseFragment);
         initData();
         initView();
@@ -72,6 +78,9 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 mSmartTabLayout.setVisibility(View.GONE);
+                secondTabview.setVisibility(View.GONE);
+                firstTabview.setVisibility(View.VISIBLE);
+
                 switchcontent(mBookStoreFragment, mBookCaseFragment);
             }
         });
@@ -80,6 +89,9 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 mSmartTabLayout.setVisibility(View.VISIBLE);
+                firstTabview.setVisibility(View.GONE);
+                secondTabview.setVisibility(View.VISIBLE);
+
                 switchcontent(mBookCaseFragment, mBookStoreFragment);
             }
         });
